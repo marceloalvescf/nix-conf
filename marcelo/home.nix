@@ -24,16 +24,15 @@ in
   };
 
   imports = [
-    ./modules/alacritty.nix
     ./modules/bash.nix
     ./modules/fish.nix
     ./modules/git.nix
-    ./modules/gnome.nix
     ./modules/gtk.nix
+    ./modules/kitty.nix
     ./modules/kubernetes.nix
     ./modules/neovim.nix
     ./modules/packages.nix
-    ./modules/ptyxis.nix
+    ./modules/plasma.nix
     ./modules/secrets.nix
     ./modules/ssh.nix
     ./modules/starship.nix

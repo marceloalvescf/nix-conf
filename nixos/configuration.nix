@@ -18,9 +18,6 @@
     # Cockpit config
     ./modules/cockpit.nix
 
-    # GNOME config
-    ./modules/gnome.nix
-
     # Font config
     ./modules/fonts.nix
 
@@ -29,6 +26,9 @@
 
     # Network config
     ./modules/networking.nix
+
+    # Plasma config
+    ./modules/plasma.nix
 
     # Program and package config
     ./modules/packages.nix
