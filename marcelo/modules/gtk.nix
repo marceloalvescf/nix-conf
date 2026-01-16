@@ -12,7 +12,7 @@
 
     font = {
       name = "IBM Plex Sans";
-      size = 11;
+      size = 10;
     };
 
     iconTheme = {
@@ -21,20 +21,20 @@
     };
 
     theme = {
-      name = "adw-gtk3-dark";
-      package = pkgs.adw-gtk3;
+      name = "Breeze-Dark";
+      package = pkgs.kdePackages.breeze-gtk;
     };
 
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
-      gtk-decoration-layout = "icon:minimize,maximize,close";
-      gtk-enable-animations = true;
-    };
+    # gtk3.extraConfig = {
+    #   gtk-application-prefer-dark-theme = true;
+    #   gtk-decoration-layout = "icon:minimize,maximize,close";
+    #   gtk-enable-animations = true;
+    # };
 
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
-      gtk-decoration-layout = "icon:minimize,maximize,close";
-      gtk-enable-animations = true;
-    };
+    # gtk4.extraConfig = {
+    #   gtk-application-prefer-dark-theme = true;
+    #   gtk-decoration-layout = "icon:minimize,maximize,close";
+    #   gtk-enable-animations = true;
+    # };
   };
 }
