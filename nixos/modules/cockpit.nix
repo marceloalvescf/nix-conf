@@ -30,8 +30,8 @@ in
     openFirewall = true;
     port = 9090;
     allowed-origins = [
-      "https://localhost:9090"
       "https://192.168.100.151:9090"
+      "https://cockpit-sc.mapeus.xyz"
     ];
   };
 

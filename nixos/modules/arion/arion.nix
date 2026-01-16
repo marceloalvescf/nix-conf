@@ -5,8 +5,8 @@ let
   # This ensures the store path is properly tracked and won't be garbage collected.
   traefikConfigDir = pkgs.runCommand "traefik-config" { } ''
     mkdir -p $out
-    cp ${./traefik/config/traefik.toml} $out/traefik.toml
-    cp ${./traefik/config/dynamic.toml} $out/dynamic.toml
+    cp ${./traefik/config/traefik.yaml} $out/traefik.yaml
+    cp ${./traefik/config/dynamic.yaml} $out/dynamic.yaml
   '';
 
   # Create a derivation containing Grafana provisioning config files.

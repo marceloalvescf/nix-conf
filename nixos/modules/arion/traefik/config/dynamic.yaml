@@ -1,0 +1,40 @@
+http:
+  routers:
+    cockpit:
+      rule: Host(`cockpit-sc.mapeus.xyz`)
+      entryPoints:
+        - websecure
+      service: cockpit
+      middlewares:
+        - default-ipallowlist
+      tls:
+        certResolver: letsencrypt
+  services:
+    cockpit:
+      loadBalancer:
+        servers:
+          - url: https://192.168.100.151:9090
+  middlewares:
+    default-ipallowlist:
+      ipAllowList:
+        sourceRange:
+          - "192.168.100.0/24"
+
+tls:
+  stores:
+    default:
+      defaultGeneratedCert:
+        resolver: letsencrypt
+        domain:
+          main: mapeus.xyz
+          sans:
+            - portainer-sc.mapeus.xyz
+            - jellyfin-sc.mapeus.xyz
+            - qbittorrent-sc.mapeus.xyz
+            - radarr-sc.mapeus.xyz
+            - prowlarr-sc.mapeus.xyz
+            - bazarr-sc.mapeus.xyz
+            - jellyseerr-sc.mapeus.xyz
+            - sonarr-sc.mapeus.xyz
+            - grafana-sc.mapeus.xyz
+            - cockpit-sc.mapeus.xyz
