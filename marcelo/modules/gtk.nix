@@ -16,8 +16,8 @@
     };
 
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "Tela-dark";
+      package = pkgs.tela-icon-theme;
     };
 
     theme = {
