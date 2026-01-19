@@ -22,6 +22,7 @@
     neofetch
     nil
     nixd
+    nixfmt
     nvd
     pciutils
     pyenv
