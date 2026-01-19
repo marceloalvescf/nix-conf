@@ -27,6 +27,9 @@
     # Network config
     ./modules/networking.nix
 
+    # OpenRGB config
+    ./modules/openrgb.nix
+
     # Plasma config
     ./modules/plasma.nix
 
