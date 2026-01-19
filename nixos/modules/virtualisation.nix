@@ -26,4 +26,16 @@
       };
     };
   };
+
+  # Allow traffic from Docker networks through the firewall
+  networking.firewall = {
+    trustedInterfaces = [
+      "docker0"
+      "br-+"
+      "veth+"
+    ];
+    # Required for container networking - allows packets from containers
+    # to be routed back correctly
+    checkReversePath = "loose";
+  };
 }
