@@ -20,6 +20,10 @@
     desktopManager.plasma6.enable = true;
   };
 
+  environment.systemPackages = with pkgs.kdePackages; [
+    kamoso
+  ];
+
   # Remove unnecessary Plasma packages
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     dolphin-plugins
