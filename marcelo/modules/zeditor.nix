@@ -40,8 +40,9 @@
         env = {
           TERM = "alacritty";
         };
-        font_family = "JetBrainsMono Nerd Font Mono";
+        font_family = "FantasqueSansM Nerd Font Mono";
         font_size = 12;
+        line_height = "standard";
         shell = {
           program = "fish";
         };
@@ -49,7 +50,7 @@
 
       ui_font_size = 16;
       buffer_font_size = 12;
-      buffer_font_family = "JetBrainsMono Nerd Font Mono";
+      buffer_font_family = "FantasqueSansM Nerd Font Mono";
       soft_wrap = "editor_width";
 
       lsp = {
