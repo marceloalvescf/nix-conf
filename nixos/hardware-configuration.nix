@@ -41,7 +41,6 @@
     allowDiscards = true;
     preOpenCommands = ''
       mkdir -p /key
-      sleep 3
       mount -n -t ext4 -o ro /dev/disk/by-uuid/ccab8878-6047-4e1a-a212-426f917752a8 /key || echo "USB not found"
     '';
     postOpenCommands = ''
