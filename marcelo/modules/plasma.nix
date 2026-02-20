@@ -58,7 +58,7 @@
 
       mice = [
         {
-          acceleration = -0.4;
+          acceleration = -0.2;
           accelerationProfile = "none";
           enable = true;
           leftHanded = false;
@@ -101,6 +101,8 @@
       "kdeglobals"."General"."XftSubPixel" = "rgb";
       "kwinrc"."Xwayland"."Scale" = 1.75;
       "kxkbrc"."Layout"."Options" = "lv3:switch";
+      "kxkbrc"."Layout"."ResetOldOptions" = true;
+      "kxkbrc"."Layout"."Use" = true;
     };
   };
 

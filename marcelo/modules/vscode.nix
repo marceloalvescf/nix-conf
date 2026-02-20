@@ -54,9 +54,9 @@
         "git.autofetch" = true;
         "explorer.confirmDragAndDrop" = false;
 
-        "debug.console.fontSize" = 14;
-        "editor.fontSize" = 14;
-        "terminal.integrated.fontSize" = 14;
+        "debug.console.fontSize" = 13;
+        "editor.fontSize" = 13;
+        "terminal.integrated.fontSize" = 13;
 
         "editor.largeFileOptimizations" = false;
         "workbench.iconTheme" = "catppuccin-mocha";
