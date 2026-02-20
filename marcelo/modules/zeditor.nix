@@ -11,6 +11,7 @@
       "docker-compose"
       "git-firefly"
       "latex"
+      "log"
       "nix"
       "python-snippets"
       "terraform"
@@ -18,6 +19,8 @@
     ];
 
     userSettings = {
+      auto_indent = false;
+
       theme = {
         mode = "system";
         dark = "Catppuccin Mocha";
@@ -40,8 +43,8 @@
         env = {
           TERM = "alacritty";
         };
-        font_family = "FantasqueSansM Nerd Font Mono";
-        font_size = 12;
+        font_family = "JetBrainsMono Nerd Font Mono";
+        font_size = 13;
         line_height = "standard";
         shell = {
           program = "fish";
@@ -49,8 +52,8 @@
       };
 
       ui_font_size = 16;
-      buffer_font_size = 12;
-      buffer_font_family = "FantasqueSansM Nerd Font Mono";
+      buffer_font_size = 13;
+      buffer_font_family = "JetBrainsMono Nerd Font Mono";
       soft_wrap = "editor_width";
 
       lsp = {

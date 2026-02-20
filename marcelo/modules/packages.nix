@@ -29,10 +29,8 @@
     sops
     spotify
     ssh-to-age
-    teams-for-linux
     telegram-desktop
     terraform
-    terragrunt
     virt-manager
     vlc
     wget

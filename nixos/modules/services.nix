@@ -3,6 +3,9 @@
 {
   # System services related settings
   services = {
+    # required for yubikey communication
+    pcscd.enable = true;
+
     # Enable OpenSSH daemon
     openssh.enable = true;
 

@@ -8,6 +8,7 @@
     spice-gtk
     spice-protocol
     virglrenderer
+    yubikey-manager
   ];
 
   # Install some packages

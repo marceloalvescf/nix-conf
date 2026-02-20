@@ -29,15 +29,29 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/454f9dc0-3f81-439b-8d26-8bcbc6e4b396";
+    device = "/dev/disk/by-uuid/534ebef1-ca48-48a0-bcf5-3e081460d4e8";
     fsType = "xfs";
   };
 
-  boot.initrd.luks.devices."nixos-rootfs".device =
-    "/dev/disk/by-uuid/6fa9ae8d-6cc2-4a71-b1d3-83e3eb4a62d7";
+  boot.initrd.luks.devices."nixos-rootfs" = {
+    device = "/dev/disk/by-path/pci-0000:01:00.0-nvme-1";
+    header = "/dev/disk/by-partuuid/d3a16764-9496-4c51-b708-7857493e2412";
+    keyFile = "/key/usb-luks.key";
+    fallbackToPassword = true;
+    allowDiscards = true;
+    preOpenCommands = ''
+      mkdir -p /key
+      sleep 3
+      mount -n -t ext4 -o ro /dev/disk/by-uuid/ccab8878-6047-4e1a-a212-426f917752a8 /key || echo "USB not found"
+    '';
+    postOpenCommands = ''
+      umount /key 2>/dev/null || true
+      rm -rf /key
+    '';
+  };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/6B94-6B59";
+    device = "/dev/disk/by-partuuid/d95a329c-a5f3-4e7f-8b95-89b932bef26f";
     fsType = "vfat";
     options = [
       "fmask=0077"

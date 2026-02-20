@@ -5,9 +5,6 @@
 }:
 
 let
-  # Import config
-  cfg = import ./config.nix;
-
   # Import packages from flake root
   lens = import (inputs.self + "/pkgs/lens-desktop/pkg.nix") { inherit pkgs; };
 in

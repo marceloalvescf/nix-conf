@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   boot = {
@@ -8,9 +8,16 @@
     kernelPackages = pkgs.linuxPackages_zen;
 
     loader = {
-      # Use systemd-boot EFI boot loader
-      systemd-boot.enable = true;
+      # Lanzaboote replaces systemd-boot's direct management,
+      # so we must disable it here.
+      systemd-boot.enable = lib.mkForce false;
       efi.canTouchEfiVariables = true;
+    };
+
+    # Lanzaboote Secure Boot configuration
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
     };
 
     # Load kernel modules on boot.
@@ -26,4 +33,9 @@
 
     tmp.useTmpfs = true;
   };
+
+  # sbctl is needed to create and manage Secure Boot keys
+  environment.systemPackages = [
+    pkgs.sbctl
+  ];
 }

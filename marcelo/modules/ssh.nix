@@ -1,9 +1,5 @@
 { ... }:
 
-let
-  cfg = import ../config.nix;
-in
-
 {
   programs.ssh = {
     enable = true;
@@ -22,57 +18,6 @@ in
         user = "marcelo";
         hostname = "192.168.122.100";
         identityFile = "~/.ssh/id_ed25519";
-      };
-
-      # SSH config for work related hosts
-      "10.208.*.* 10.206.*.* 172.25.*.* 10.33.*.* 10.34.*.* 10.100.*.*" = {
-        proxyCommand = "nc -X 5 -x ${cfg.proxy.hostPort} %h %p";
-      };
-      "ssh.dev.azure.com" = {
-        identityFile = "~/.ssh/id_rsa_marcelo_filho";
-        identitiesOnly = true;
-        extraOptions = {
-          HostkeyAlgorithms = "+ssh-rsa";
-        };
-      };
-      "gitlab-corp-hml.lojasrenner.io" = {
-        user = "git";
-        hostname = "gitlab-corp-hml.lojasrenner.io";
-        identityFile = "~/.ssh/id_ed25519_marcelo_filho";
-        proxyCommand = "nc -X 5 -x ${cfg.proxy.hostPort} %h %p";
-        extraOptions = {
-          PreferredAuthentications = "publickey";
-        };
-      };
-      "gitlab-corp.lojasrenner.io" = {
-        user = "git";
-        hostname = "gitlab-corp.lojasrenner.io";
-        identityFile = "~/.ssh/id_ed25519_marcelo_filho";
-        proxyCommand = "nc -X 5 -x ${cfg.proxy.hostPort} %h %p";
-        extraOptions = {
-          PreferredAuthentications = "publickey";
-        };
-      };
-      "gitlab.lojasrenner.com.br" = {
-        user = "git";
-        hostname = "gitlab.lojasrenner.com.br";
-        identityFile = "~/.ssh/id_ed25519_marcelo_filho";
-        proxyCommand = "nc -X 5 -x ${cfg.proxy.hostPort} %h %p";
-        extraOptions = {
-          PreferredAuthentications = "publickey";
-        };
-      };
-      "bastion-atg4" = {
-        user = "opc";
-        hostname = "10.206.0.84";
-        identityFile = "~/.ssh/oci_rsa_resource";
-        proxyCommand = "nc -X 5 -x ${cfg.proxy.hostPort} %h %p";
-      };
-      "rnn-sup-sre-automations-prod" = {
-        user = "sre_automations";
-        hostname = "10.34.129.30";
-        identityFile = "~/.ssh/id_rsa_sis_sre_automations";
-        proxyCommand = "nc -X 5 -x ${cfg.proxy.hostPort} %h %p";
       };
     };
   };

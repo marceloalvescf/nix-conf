@@ -22,7 +22,6 @@
       "vi" = "nvim";
       "k" = "kubectl";
       "kx" = "kubectx";
-      "alpinepod" = "k run -it alpine --image alpine -- /bin/sh 'sleep infinity'";
       "cd" = "z";
       "cleandocker" = "docker system prune -a -f";
       "gb" = "git branch --show-current";

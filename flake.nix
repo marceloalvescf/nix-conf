@@ -25,11 +25,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     inputs@{
       arion,
+      lanzaboote,
       nixpkgs,
       home-manager,
       plasma-manager,
@@ -43,6 +49,7 @@
           modules = [
             ./nixos/configuration.nix
             arion.nixosModules.arion
+            lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
