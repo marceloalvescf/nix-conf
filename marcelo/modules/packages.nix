@@ -14,12 +14,12 @@
     cdrtools
     docker-compose
     eza
+    fastfetch
     git
     htop
     jq
     libxslt
     mcfly
-    neofetch
     nil
     nixd
     nixfmt

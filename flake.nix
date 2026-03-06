@@ -2,7 +2,9 @@
   description = "Starscream NixOS setup";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # last commit before break libvirt
+    nixpkgs.url = "github:nixos/nixpkgs/d85430e9d0890135bbe76374a3e0c931fd888672";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     home-manager = {

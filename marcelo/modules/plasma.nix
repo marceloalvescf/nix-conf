@@ -8,7 +8,7 @@
       clickItemTo = "select";
       lookAndFeel = "org.kde.breezedark.desktop";
       cursor.theme = "WhiteSur-cursors";
-      iconTheme = "Papirus-Dark";
+      iconTheme = "Tela-dark";
     };
 
     fonts = {
