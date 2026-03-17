@@ -2,14 +2,14 @@
 
 let
   pname = "lens-desktop";
-  version = "2026.2.111511";
+  version = "2026.3.160808";
 
   src = pkgs.fetchurl {
     url = "https://api.k8slens.dev/binaries/Lens-${version}-latest.x86_64.AppImage";
-    sha256 = "sha256-UcLRhdy9qsrObr+B6Qwv6Yqu7eOF7b4xgqKOJNAUU88=";
+    sha256 = "sha256-P0WAjgll5JBqy+vVHWwCzcK/pwT6CqHbDPLOkbdBEzo=";
   };
 
-  meta = with pkgs.lib; {
+  meta = {
     description = "Kubernetes IDE";
     homepage = "https://k8slens.dev/";
     # license = licenses.unfree; # Lens is not FOSS
