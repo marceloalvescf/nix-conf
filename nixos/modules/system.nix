@@ -1,6 +1,9 @@
 { ... }:
 
 {
+  # Made /etc/hosts file writable
+  environment.etc.hosts.mode = "0755";
+
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
 
