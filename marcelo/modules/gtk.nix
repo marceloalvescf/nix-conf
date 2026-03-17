@@ -16,8 +16,8 @@
     };
 
     iconTheme = {
-      name = "Tela-dark";
-      package = pkgs.tela-icon-theme;
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
     };
 
     theme = {
@@ -25,16 +25,16 @@
       package = pkgs.kdePackages.breeze-gtk;
     };
 
-    # gtk3.extraConfig = {
-    #   gtk-application-prefer-dark-theme = true;
-    #   gtk-decoration-layout = "icon:minimize,maximize,close";
-    #   gtk-enable-animations = true;
-    # };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+      gtk-decoration-layout = "icon:minimize,maximize,close";
+      gtk-enable-animations = true;
+    };
 
-    # gtk4.extraConfig = {
-    #   gtk-application-prefer-dark-theme = true;
-    #   gtk-decoration-layout = "icon:minimize,maximize,close";
-    #   gtk-enable-animations = true;
-    # };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+      gtk-decoration-layout = "icon:minimize,maximize,close";
+      gtk-enable-animations = true;
+    };
   };
 }
