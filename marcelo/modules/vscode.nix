@@ -7,6 +7,7 @@
       extensions =
         with pkgs.vscode-extensions;
         [
+          anthropic.claude-code
           catppuccin.catppuccin-vsc
           catppuccin.catppuccin-vsc-icons
           eamodio.gitlens
@@ -80,6 +81,7 @@
         "terminal.external.linuxExec" = "kitty";
         "terminal.integrated.stickyScroll.enabled" = false;
         "terminal.integrated.suggest.enabled" = false;
+        "claudeCode.preferredLocation" = "panel";
       };
     };
   };
