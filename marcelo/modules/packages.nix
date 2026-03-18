@@ -15,7 +15,6 @@
     docker-compose
     eza
     fastfetch
-    flatpak
     git
     htop
     jq

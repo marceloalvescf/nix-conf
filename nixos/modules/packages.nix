@@ -19,4 +19,7 @@
     # Run unpatched dynamic binaries
     nix-ld.enable = true;
   };
+
+  # Enable flatpak globally
+  services.flatpak.enable = true;
 }
