@@ -22,6 +22,7 @@
 
   environment.systemPackages = with pkgs.kdePackages; [
     kamoso
+    kcalc
   ];
 
   # Remove unnecessary Plasma packages

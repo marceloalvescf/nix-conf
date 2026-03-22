@@ -78,12 +78,12 @@
         autoSuspend.action = "nothing";
         dimDisplay = {
           enable = true;
-          idleTimeout = 900;
+          idleTimeout = 300;
         };
         powerButtonAction = "nothing";
         powerProfile = "balanced";
         turnOffDisplay = {
-          idleTimeout = 1800;
+          idleTimeout = 900;
           idleTimeoutWhenLocked = "immediately";
         };
       };
@@ -91,7 +91,7 @@
 
     kscreenlocker = {
       lockOnResume = true;
-      timeout = 10;
+      timeout = 5;
     };
 
     configFile = {
