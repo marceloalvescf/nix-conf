@@ -24,15 +24,31 @@
       "kx" = "kubectx";
       "cd" = "z";
       "cleandocker" = "docker system prune -a -f";
+      "gad" = "git add";
       "gb" = "git branch --show-current";
       "gck" = "git checkout";
       "gcm" = "git commit";
       "gps" = "git push";
+      "nfu" = "nix flake update";
+      "nrdr" = "nixos-rebuild dry-run --flake .";
       "reload_kitty" = "kill -SIGUSR1 $KITTY_PID";
     };
 
     functions = {
       genpasswd = "LC_ALL=C tr -dc 'A-Za-z0-9_!@#$%^&*()-_=+' </dev/random | head -c 32 | xargs | tr -d '\n'";
+      nrs = ''
+        nix flake update; or return
+        git add flake.lock
+        if not git diff --cached --quiet
+          git commit -m "chore: update flake inputs"; or return
+        end
+        sudo nixos-rebuild build --flake .; or return
+        nvd diff /run/current-system result
+        read --prompt-str "Switch? [y/N] " confirm
+        if test "$confirm" = y
+          sudo nixos-rebuild switch --flake .
+        end
+      '';
     };
   };
 

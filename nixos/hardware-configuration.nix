@@ -19,12 +19,14 @@
     "ahci"
     "usbhid"
     "usb_storage"
+    "ext4"
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "i2c-dev"
     "i2c-piix4"
     "kvm-amd"
+    "nct6775"
   ];
   boot.extraModulePackages = [ ];
 
@@ -37,16 +39,7 @@
     device = "/dev/disk/by-path/pci-0000:01:00.0-nvme-1";
     header = "/dev/disk/by-partuuid/d3a16764-9496-4c51-b708-7857493e2412";
     keyFile = "/key/usb-luks.key";
-    fallbackToPassword = true;
     allowDiscards = true;
-    preOpenCommands = ''
-      mkdir -p /key
-      mount -n -t ext4 -o ro /dev/disk/by-uuid/ccab8878-6047-4e1a-a212-426f917752a8 /key || echo "USB not found"
-    '';
-    postOpenCommands = ''
-      umount /key 2>/dev/null || true
-      rm -rf /key
-    '';
   };
 
   fileSystems."/boot" = {

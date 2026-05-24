@@ -15,9 +15,6 @@
     # Boot config
     ./modules/boot.nix
 
-    # Cockpit config
-    ./modules/cockpit.nix
-
     # Font config
     ./modules/fonts.nix
 
@@ -38,6 +35,9 @@
 
     # Prometheus related config
     ./modules/prometheus.nix
+
+    # ROCm config
+    ./modules/rocm.nix
 
     # SOPS config
     ./modules/secrets.nix

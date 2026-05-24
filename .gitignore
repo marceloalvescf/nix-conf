@@ -3,3 +3,8 @@ result
 # SOPS age keys - NEVER commit these!
 **/keys.txt
 .config/sops/age/
+
+# IA related docs
+AGENTS.md
+CLAUDE.md
+docs/superpowers

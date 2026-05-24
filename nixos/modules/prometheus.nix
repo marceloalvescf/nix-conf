@@ -29,6 +29,14 @@
             }
           ];
         }
+        {
+          job_name = "docker";
+          static_configs = [
+            {
+              targets = [ "localhost:9323" ];
+            }
+          ];
+        }
       ];
 
       exporters = {

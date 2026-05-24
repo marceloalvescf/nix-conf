@@ -6,7 +6,7 @@
   services = {
     qbittorrent = {
       service = {
-        image = "linuxserver/qbittorrent:latest";
+        image = "lscr.io/linuxserver/qbittorrent:latest";
         container_name = "qbittorrent";
         restart = "unless-stopped";
         healthcheck = {
@@ -49,7 +49,7 @@
 
     radarr = {
       service = {
-        image = "linuxserver/radarr:latest";
+        image = "lscr.io/linuxserver/radarr:latest";
         container_name = "radarr";
         restart = "unless-stopped";
         healthcheck = {
@@ -92,7 +92,7 @@
 
     sonarr = {
       service = {
-        image = "linuxserver/sonarr:latest";
+        image = "lscr.io/linuxserver/sonarr:latest";
         container_name = "sonarr";
         restart = "unless-stopped";
         healthcheck = {
@@ -135,7 +135,7 @@
 
     bazarr = {
       service = {
-        image = "linuxserver/bazarr:latest";
+        image = "lscr.io/linuxserver/bazarr:latest";
         container_name = "bazarr";
         restart = "unless-stopped";
         healthcheck = {
@@ -193,7 +193,7 @@
 
     prowlarr = {
       service = {
-        image = "linuxserver/prowlarr:latest";
+        image = "lscr.io/linuxserver/prowlarr:latest";
         container_name = "prowlarr";
         restart = "unless-stopped";
         healthcheck = {
@@ -233,7 +233,7 @@
 
     jellyfin = {
       service = {
-        image = "linuxserver/jellyfin:latest";
+        image = "lscr.io/linuxserver/jellyfin:latest";
         container_name = "jellyfin";
         restart = "unless-stopped";
 
@@ -262,7 +262,7 @@
 
     jellyseerr = {
       service = {
-        image = "ghcr.io/fallenbagel/jellyseerr:latest";
+        image = "ghcr.io/seerr-team/seerr:latest";
         container_name = "jellyseerr";
         restart = "unless-stopped";
         healthcheck = {

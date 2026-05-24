@@ -2,11 +2,11 @@
 
 let
   pname = "lens-desktop";
-  version = "2026.3.160808";
+  version = "2026.5.181248";
 
   src = pkgs.fetchurl {
     url = "https://api.k8slens.dev/binaries/Lens-${version}-latest.x86_64.AppImage";
-    sha256 = "sha256-P0WAjgll5JBqy+vVHWwCzcK/pwT6CqHbDPLOkbdBEzo=";
+    sha256 = "sha256-i8U1KRUIH/Vt9EAHJcI7nsQTbxUQLE4lkNj5G0zJNmc=";
   };
 
   meta = {

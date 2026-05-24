@@ -6,6 +6,7 @@
 
 let
   # Import packages from flake root
+  codex = import (inputs.self + "/pkgs/codex/pkg.nix") { inherit pkgs; };
   lens = import (inputs.self + "/pkgs/lens-desktop/pkg.nix") { inherit pkgs; };
 in
 {
@@ -34,13 +35,18 @@ in
     ./modules/ssh.nix
     ./modules/starship.nix
     ./modules/tmux.nix
-    ./modules/vscode.nix
+    ./modules/vscodium.nix
     ./modules/zeditor.nix
   ];
 
   home.packages = [
+    codex
     lens
   ];
 
   programs.home-manager.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 }
