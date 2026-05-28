@@ -38,3 +38,4 @@ tls:
             - sonarr-sc.mapeus.xyz
             - grafana-sc.mapeus.xyz
             - cockpit-sc.mapeus.xyz
+            - autokube-sc.mapeus.xyz

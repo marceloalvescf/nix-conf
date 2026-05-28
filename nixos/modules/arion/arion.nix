@@ -25,6 +25,10 @@ in
         imports = [ ./portainer/portainer.nix ];
       };
 
+      autokube.settings = {
+        imports = [ ./autokube/autokube.nix ];
+      };
+
       streaming.settings = {
         imports = [ ./streaming/streaming.nix ];
       };
