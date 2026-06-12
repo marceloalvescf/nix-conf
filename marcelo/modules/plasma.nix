@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 
 {
   programs.plasma = {
@@ -105,6 +105,15 @@
       "kxkbrc"."Layout"."Use" = true;
     };
   };
+
+  # Pinned task manager icons go blank after a rebuild because Plasma
+  # stores absolute /nix/store paths to .desktop files in its config,
+  # which become stale once the old store paths are garbage collected.
+  # Rewrite them to generic application references on every activation.
+  home.activation.cleanPlasmaLaunchers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    $DRY_RUN_CMD sed -i 's|file:///nix/store/[^/]*/share/applications/|applications:|g' \
+      ${config.home.homeDirectory}/.config/plasma-org.kde.plasma.desktop-appletsrc || true
+  '';
 
   qt = {
     enable = true;
