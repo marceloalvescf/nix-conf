@@ -23,6 +23,7 @@ in
 
   imports = [
     ./modules/bash.nix
+    ./modules/chromium.nix
     ./modules/fish.nix
     ./modules/git.nix
     ./modules/gtk.nix
