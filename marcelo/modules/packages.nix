@@ -11,7 +11,6 @@
     aria2
     bisq2
     bruno
-    chromium
     cdrtools
     docker-compose
     eza
