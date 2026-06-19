@@ -35,13 +35,13 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      document-font-name = "IBM Plex Sans 10";
+      document-font-name = "Adwaita Sans 10";
       font-antialiasing = "rgba";
       font-hinting = "full";
-      font-name = "IBM Plex Sans 10";
+      font-name = "Adwaita Sans 10";
       gtk-theme = "adw-gtk3-dark";
       icon-theme = "Papirus-Dark";
-      monospace-font-name = "IBM Plex Mono 11";
+      monospace-font-name = "Adwaita Mono 11";
     };
 
     "org/gnome/desktop/input-sources" = {
