@@ -127,6 +127,13 @@ stdenv.mkDerivation {
     cp -r usr/lib "$out/lib"
     cp -r usr/share "$out/share"
 
+    # GNOME resolves Icon= against its theme cache, which a home-manager
+    # profile install never regenerates; point at the absolute store PNG so
+    # the launcher icon renders without a cache lookup.
+    substituteInPlace "$out/share/applications/claude-desktop.desktop" \
+      --replace-fail 'Icon=claude-desktop' \
+        "Icon=$out/share/icons/hicolor/256x256/apps/claude-desktop.png"
+
     # Electron ships its own vulkan/EGL/ffmpeg; keep the whole app dir intact.
     makeWrapper "$out/lib/claude-desktop/claude-desktop" "$out/bin/claude-desktop" \
       "''${gappsWrapperArgs[@]}" \
