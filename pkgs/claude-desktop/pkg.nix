@@ -135,9 +135,15 @@ stdenv.mkDerivation {
         "Icon=$out/share/icons/hicolor/256x256/apps/claude-desktop.png"
 
     # Electron ships its own vulkan/EGL/ffmpeg; keep the whole app dir intact.
+    # ANGLE dlopen()s the native "libEGL.so.1" by soname to reach the real GPU
+    # driver. NixOS has no ldconfig cache, so without the driver dir on the
+    # library path that lookup fails, GPU init aborts, and Chromium falls back
+    # to software rendering (--use-gl=disabled) — making the UI sluggish. Point
+    # the loader at the impure system driver path so hardware acceleration works.
     makeWrapper "$out/lib/claude-desktop/claude-desktop" "$out/bin/claude-desktop" \
       "''${gappsWrapperArgs[@]}" \
       --prefix PATH : "${lib.makeBinPath [ xdg-utils ]}" \
+      --prefix LD_LIBRARY_PATH : "/run/opengl-driver/lib" \
       --add-flags "--ozone-platform-hint=auto"
 
     runHook postInstall
