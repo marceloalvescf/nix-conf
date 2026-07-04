@@ -36,6 +36,17 @@
 
     functions = {
       genpasswd = "LC_ALL=C tr -dc 'A-Za-z0-9_!@#$%^&*()-_=+' </dev/random | head -c 32 | xargs | tr -d '\n'";
+      claude-desktop-update = ''
+        set -l packages_url "https://downloads.claude.ai/claude-desktop/apt/stable/dists/stable/main/binary-amd64/Packages"
+        set -l pkg_nix "$HOME/Projects/Github/nix-conf/pkgs/claude-desktop/pkg.nix"
+        set -l current (sed -n 's/.*version = "\(.*\)";.*/\1/p' "$pkg_nix" | head -1)
+        set -l latest (curl -fsSL "$packages_url" | awk '/^Version: / { print $2 }' | sort -V | tail -1)
+        if test "$latest" != "$current"
+          echo "Claude Desktop update available — current: $current / latest: $latest"
+        else
+          echo "Claude Desktop is up to date ($current)"
+        end
+      '';
       nrs = ''
         nix flake update; or return
         git add flake.lock
