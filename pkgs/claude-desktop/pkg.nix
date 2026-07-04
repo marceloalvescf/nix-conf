@@ -44,13 +44,13 @@
 }:
 
 let
-  version = "1.17377.0";
+  version = "1.18286.0";
 
   # Official Anthropic apt repository. The .deb bundles its own Electron
   # runtime, so we only extract it and repair the ELF interpreter / rpaths.
   src = fetchurl {
     url = "https://downloads.claude.ai/claude-desktop/apt/stable/pool/main/c/claude-desktop/claude-desktop_${version}_amd64.deb";
-    hash = "sha256-VjyN+O47lXyiNBFZgDhulgAH7Yz8jMBMd9WKjUP2wBg=";
+    hash = "sha256-jzFK0agKq1JxGo6qvAaq5I+zQfCt6koNcmTbXKudBTY=";
   };
 in
 stdenv.mkDerivation {
