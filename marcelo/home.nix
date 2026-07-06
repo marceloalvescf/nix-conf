@@ -8,6 +8,7 @@ let
   # Import packages from flake root
   claude-desktop = pkgs.callPackage (inputs.self + "/pkgs/claude-desktop/pkg.nix") { };
   lens = import (inputs.self + "/pkgs/lens-desktop/pkg.nix") { inherit pkgs; };
+  spotify-xwayland = import (inputs.self + "/pkgs/spotify-xwayland/pkg.nix") { inherit pkgs; };
 in
 {
   home.username = "marcelo";
@@ -44,6 +45,7 @@ in
   home.packages = [
     claude-desktop
     lens
+    spotify-xwayland
   ];
 
   programs.home-manager.enable = true;
