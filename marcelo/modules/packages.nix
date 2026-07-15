@@ -23,6 +23,7 @@
     nil
     nixd
     nixfmt
+    nodejs
     nvd
     pciutils
     pyenv
