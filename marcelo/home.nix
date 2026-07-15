@@ -6,7 +6,7 @@
 
 let
   # Import packages from flake root
-  codex = import (inputs.self + "/pkgs/codex/pkg.nix") { inherit pkgs; };
+  claude-desktop = pkgs.callPackage (inputs.self + "/pkgs/claude-desktop/pkg.nix") { };
   lens = import (inputs.self + "/pkgs/lens-desktop/pkg.nix") { inherit pkgs; };
 in
 {
@@ -41,7 +41,7 @@ in
   ];
 
   home.packages = [
-    codex
+    claude-desktop
     lens
   ];
 
