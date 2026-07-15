@@ -4,8 +4,7 @@
   boot = {
     # kernelParams = [ "quiet" ];
 
-    # Using linux-zen kernel
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
     loader = {
       # Lanzaboote replaces systemd-boot's direct management,

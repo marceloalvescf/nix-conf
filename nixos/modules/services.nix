@@ -23,12 +23,38 @@
       alsa.support32Bit = true;
       pulse.enable = true;
 
-      # If you want to use JACK applications, uncomment this
-      #jack.enable = true;
+      # Required prerequisite for the Echo Dot A2DP sink rule below.
+      # Without these codec and role settings, WirePlumber fails to negotiate
+      # the A2DP profile and the device-specific auto-connect rule has no effect.
+      wireplumber.extraConfig.bluetoothEnhancements = {
+        "monitor.bluez.properties" = {
+          "bluez5.enable-sbc-xq" = true;
+          "bluez5.enable-msbc" = true;
+          "bluez5.enable-hw-volume" = true;
+          "bluez5.headset-roles" = [
+            "hsp_hs"
+            "hsp_ag"
+            "hfp_hf"
+            "hfp_ag"
+          ];
+        };
+      };
 
-      # use the example session manager (no others are packaged yet so this is enabled by default,
-      # no need to redefine it in your config for now)
-      #media-session.enable = true;
+      # Force Echo Dot to connect as A2DP sink (speaker) instead of audio-gateway.
+      # Without this, BlueZ negotiates the wrong profile and the device appears as input.
+      # See: https://github.com/bluez/bluez/issues/1922
+      wireplumber.extraConfig.echoAutoConnect = {
+        "monitor.bluez.rules" = [
+          {
+            matches = [ { "device.name" = "bluez_card.18_0B_1B_EA_8B_1C"; } ];
+            actions = {
+              "update-props" = {
+                "bluez5.auto-connect" = [ "a2dp_sink" ];
+              };
+            };
+          }
+        ];
+      };
     };
   };
 }

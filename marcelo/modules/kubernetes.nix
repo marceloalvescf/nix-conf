@@ -10,7 +10,6 @@
     kubectl
     kubectx
     kubernetes-helm
-    minikube
     velero
   ];
 
