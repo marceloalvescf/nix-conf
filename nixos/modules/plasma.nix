@@ -11,11 +11,6 @@
       wayland = {
         enable = true;
       };
-      settings = {
-        General = {
-          DisplayServer = "Wayland";
-        };
-      };
     };
     desktopManager.plasma6.enable = true;
   };
