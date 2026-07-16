@@ -15,6 +15,7 @@
     docker-compose
     eza
     fastfetch
+    gh
     git
     htop
     jq
