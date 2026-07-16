@@ -145,6 +145,12 @@
     };
   };
 
+  home.packages = [
+    (pkgs.callPackage ../../pkgs/plasmoids/andromeda-launcher.nix { })
+    (pkgs.callPackage ../../pkgs/plasmoids/resources-monitor.nix { })
+    (pkgs.callPackage ../../pkgs/plasmoids/weather-widget-plus.nix { })
+  ];
+
   qt = {
     enable = true;
     platformTheme.name = "kde";
