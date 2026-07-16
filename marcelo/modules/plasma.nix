@@ -90,9 +90,13 @@
     };
 
     kscreenlocker = {
+      appearance = {
+        showMediaControls = false;
+        wallpaperPictureOfTheDay.provider = "bing";
+      };
       autoLock = true;
       lockOnResume = true;
-      timeout = 5;
+      timeout = 0;
     };
 
     panels = [
