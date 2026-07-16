@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, ... }:
 
 {
   programs.plasma = {
@@ -90,9 +90,43 @@
     };
 
     kscreenlocker = {
+      autoLock = true;
       lockOnResume = true;
       timeout = 5;
     };
+
+    panels = [
+      {
+        location = "bottom";
+        widgets = [
+          "org.kde.plasma.kickoff"
+          "org.kde.plasma.pager"
+          {
+            iconTasks = {
+              launchers = [
+                "applications:org.kde.dolphin.desktop"
+                "applications:org.kde.kate.desktop"
+                "applications:virt-manager.desktop"
+                "applications:chromium-browser.desktop"
+                "applications:firefox.desktop"
+                "applications:claude-desktop.desktop"
+                "applications:codium.desktop"
+                "applications:dev.zed.Zed.desktop"
+                "applications:lens-desktop.desktop"
+                "applications:bruno.desktop"
+                "applications:kitty.desktop"
+                "applications:org.telegram.desktop.desktop"
+                "applications:spotify.desktop"
+              ];
+            };
+          }
+          "org.kde.plasma.marginsseparator"
+          "org.kde.plasma.systemtray"
+          "org.kde.plasma.digitalclock"
+          "org.kde.plasma.showdesktop"
+        ];
+      }
+    ];
 
     configFile = {
       "baloofilerc"."Basic Settings"."Indexing-Enabled" = false;
@@ -105,15 +139,6 @@
       "kxkbrc"."Layout"."Use" = true;
     };
   };
-
-  # Pinned task manager icons go blank after a rebuild because Plasma
-  # stores absolute /nix/store paths to .desktop files in its config,
-  # which become stale once the old store paths are garbage collected.
-  # Rewrite them to generic application references on every activation.
-  home.activation.cleanPlasmaLaunchers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    $DRY_RUN_CMD sed -i 's|file:///nix/store/[^/]*/share/applications/|applications:|g' \
-      ${config.home.homeDirectory}/.config/plasma-org.kde.plasma.desktop-appletsrc || true
-  '';
 
   qt = {
     enable = true;
