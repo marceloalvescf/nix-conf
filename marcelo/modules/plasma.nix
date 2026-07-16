@@ -109,7 +109,7 @@
                 "applications:virt-manager.desktop"
                 "applications:chromium-browser.desktop"
                 "applications:firefox.desktop"
-                "applications:claude-desktop.desktop"
+                "applications:com.anthropic.Claude.desktop"
                 "applications:codium.desktop"
                 "applications:dev.zed.Zed.desktop"
                 "applications:lens-desktop.desktop"
