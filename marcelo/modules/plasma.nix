@@ -119,7 +119,6 @@
                 "applications:codium.desktop"
                 "applications:dev.zed.Zed.desktop"
                 "applications:lens-desktop.desktop"
-                "applications:bruno.desktop"
                 "applications:kitty.desktop"
                 "applications:org.telegram.desktop.desktop"
                 "applications:spotify.desktop"
