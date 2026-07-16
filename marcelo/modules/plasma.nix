@@ -96,7 +96,9 @@
       };
       autoLock = true;
       lockOnResume = true;
-      timeout = 0;
+      passwordRequired = true;
+      passwordRequiredDelay = 5;
+      timeout = 15;
     };
 
     panels = [
