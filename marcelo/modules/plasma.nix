@@ -105,8 +105,17 @@
       {
         location = "bottom";
         widgets = [
-          "org.kde.plasma.kickoff"
-          "org.kde.plasma.pager"
+          "org.kde.plasma.panelspacer"
+          {
+            name = "AndromedaLauncher";
+            config.General = {
+              enableGlow = true;
+              floating = true;
+              glowColor = 1;
+              launcherPosition = 1;
+              useSystemFontSettings = true;
+            };
+          }
           {
             iconTasks = {
               launchers = [
@@ -123,12 +132,107 @@
                 "applications:org.telegram.desktop.desktop"
                 "applications:spotify.desktop"
               ];
+              behavior.showTasks = {
+                onlyInCurrentDesktop = false;
+                onlyInCurrentActivity = false;
+              };
+              settings.General.fill = false;
             };
           }
+          "org.kde.plasma.panelspacer"
           "org.kde.plasma.marginsseparator"
-          "org.kde.plasma.systemtray"
+          {
+            name = "org.kde.plasma.resources-monitor";
+            config.General.graphs = builtins.toJSON [
+              {
+                "_v" = 3;
+                type = "cpu";
+                sizes = [
+                  (-1)
+                  (-1)
+                ];
+                colors = [
+                  "highlightColor"
+                  "textColor"
+                  "textColor"
+                ];
+                sensorsType = [
+                  "usage"
+                  "classic"
+                  true
+                ];
+                clockAggregator = "average";
+                eCoresCount = 0;
+                thresholds = [
+                  85
+                  105
+                ];
+              }
+              {
+                "_v" = 3;
+                type = "memory";
+                sizes = [
+                  (-1)
+                  (-1)
+                ];
+                colors = [
+                  "highlightColor"
+                  "negativeTextColor"
+                ];
+                sensorsType = [
+                  "physical"
+                  "memory-percent"
+                ];
+                thresholds = [
+                  70
+                  90
+                ];
+              }
+            ];
+          }
+          {
+            systemTray.items = {
+              # devicenotifier and brightness intentionally absent: "never show".
+              extra = [
+                "org.kde.plasma.cameraindicator"
+                "org.kde.plasma.clipboard"
+                "org.kde.plasma.manage-inputmethod"
+                "org.kde.plasma.mediacontroller"
+                "org.kde.plasma.notifications"
+                "org.kde.kscreen"
+                "org.kde.plasma.battery"
+                "org.kde.plasma.bluetooth"
+                "org.kde.plasma.keyboardindicator"
+                "org.kde.plasma.keyboardlayout"
+                "org.kde.plasma.networkmanagement"
+                "org.kde.plasma.volume"
+                "org.kde.plasma.weather"
+              ];
+            };
+          }
           "org.kde.plasma.digitalclock"
-          "org.kde.plasma.showdesktop"
+          {
+            name = "weather.widget.plus";
+            config = {
+              Appearance.widgetFontSize = 15;
+              Location = {
+                firstRun = false;
+                places = builtins.toJSON [
+                  {
+                    providerId = "om";
+                    placeIdentifier = "latitude=-19.6&longitude=-43.9&altitude=800";
+                    placeAlias = "Home";
+                    timezoneID = 68;
+                  }
+                ];
+              };
+              Units = {
+                temperatureType = "celsius";
+                pressureType = "hPa";
+                windSpeedType = "kmh";
+              };
+            };
+          }
         ];
       }
     ];
@@ -138,6 +242,8 @@
       "kdeglobals"."General"."XftAntialias" = true;
       "kdeglobals"."General"."XftHintStyle" = "hintfull";
       "kdeglobals"."General"."XftSubPixel" = "rgb";
+      "kwinrc"."TabBox"."ActivitiesMode" = 0;
+      "kwinrc"."TabBox"."DesktopMode" = 0;
       "kwinrc"."Xwayland"."Scale" = 1.75;
       "kxkbrc"."Layout"."Options" = "lv3:switch";
       "kxkbrc"."Layout"."ResetOldOptions" = true;
