@@ -6,9 +6,11 @@
 
     workspace = {
       clickItemTo = "select";
-      lookAndFeel = "org.kde.breezedark.desktop";
       cursor.theme = "WhiteSur-cursors";
       iconTheme = "Papirus-Dark";
+      lookAndFeel = "org.kde.breezedark.desktop";
+      wallpaper = "/home/marcelo/Pictures/Wallpapers/dodgechallenger.jpg";
+      wallpaperBackground.blur = true;
     };
 
     fonts = {
@@ -105,6 +107,28 @@
       {
         location = "bottom";
         widgets = [
+          {
+            name = "weather.widget.plus";
+            config = {
+              Appearance.widgetFontSize = 15;
+              Location = {
+                firstRun = false;
+                places = builtins.toJSON [
+                  {
+                    providerId = "om";
+                    placeIdentifier = "latitude=-19.6&longitude=-43.9&altitude=800";
+                    placeAlias = "Home";
+                    timezoneID = 68;
+                  }
+                ];
+              };
+              Units = {
+                temperatureType = "celsius";
+                pressureType = "hPa";
+                windSpeedType = "kmh";
+              };
+            };
+          }
           "org.kde.plasma.panelspacer"
           {
             name = "AndromedaLauncher";
@@ -211,28 +235,6 @@
             };
           }
           "org.kde.plasma.digitalclock"
-          {
-            name = "weather.widget.plus";
-            config = {
-              Appearance.widgetFontSize = 15;
-              Location = {
-                firstRun = false;
-                places = builtins.toJSON [
-                  {
-                    providerId = "om";
-                    placeIdentifier = "latitude=-19.6&longitude=-43.9&altitude=800";
-                    placeAlias = "Home";
-                    timezoneID = 68;
-                  }
-                ];
-              };
-              Units = {
-                temperatureType = "celsius";
-                pressureType = "hPa";
-                windSpeedType = "kmh";
-              };
-            };
-          }
         ];
       }
     ];
