@@ -212,6 +212,37 @@
                   90
                 ];
               }
+              {
+                "_v" = 3;
+                type = "network";
+                sizes = [
+                  (-1)
+                  (-1)
+                ];
+                colors = [
+                  "highlightColor"
+                  "positiveTextColor"
+                ];
+                sensorsType = [
+                  false
+                  "kibibyte"
+                ];
+                uplimits = [
+                  100000
+                  100000
+                ];
+                ignoredInterfaces = [
+                  "veth90cb290"
+                  "vethfd6a27f"
+                  "veth1c47d10"
+                  "vethc8744f3"
+                  "vetha83fa94"
+                  "vetha8d7764"
+                  "vetha7e93a6"
+                  "veth6c01526"
+                ];
+                icons = true;
+              }
             ];
           }
           {
