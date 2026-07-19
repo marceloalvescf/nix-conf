@@ -8,7 +8,7 @@ This repository is machine-specific. It can be used as a reference, but it is no
 
 - NixOS and Home Manager evaluated together from one flake
 - Lanzaboote Secure Boot and USB-key LUKS unlock
-- Plasma 6, SDDM, PipeWire, AMD graphics, ROCm, Bluetooth, and OpenRGB
+- Plasma 6, greetd/tuigreet, PipeWire, AMD graphics, ROCm, Bluetooth, and OpenRGB
 - Fish, Kitty, tmux, Neovim, VSCodium, Zed, Kubernetes, Terraform, and Ansible tooling
 - Docker/Arion services behind Traefik
 - Libvirt/KVM and Cockpit for local virtualization
