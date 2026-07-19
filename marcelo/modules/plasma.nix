@@ -65,9 +65,9 @@
           enable = true;
           leftHanded = false;
           middleButtonEmulation = false;
-          name = "Logitech MX Master 3S";
+          name = "Logitech USB Receiver Mouse";
           naturalScroll = false;
-          productId = "b034";
+          productId = "c548";
           scrollSpeed = 1;
           vendorId = "046d";
         }
