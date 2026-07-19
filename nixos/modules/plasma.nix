@@ -5,13 +5,19 @@
     # Disable X11
     xserver.enable = false;
 
-    # Install Plasma 6
-    displayManager.sddm = {
-      enable = false;
-#      wayland = {
-#        enable = true;
-#      };
+    # Replaced sddm with greetd (lighter, more reliable under Wayland-only)
+    displayManager.sddm.enable = false;
+
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+        };
+      };
     };
+
+    # Install Plasma 6
     desktopManager.plasma6.enable = true;
   };
 
