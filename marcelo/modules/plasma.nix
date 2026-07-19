@@ -60,8 +60,8 @@
 
       mice = [
         {
-          acceleration = -0.2;
-          accelerationProfile = "none";
+          acceleration = -0.6;
+          accelerationProfile = "default";
           enable = true;
           leftHanded = false;
           middleButtonEmulation = false;
