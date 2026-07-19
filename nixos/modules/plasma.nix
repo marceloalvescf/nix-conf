@@ -7,10 +7,10 @@
 
     # Install Plasma 6
     displayManager.sddm = {
-      enable = true;
-      wayland = {
-        enable = true;
-      };
+      enable = false;
+#      wayland = {
+#        enable = true;
+#      };
     };
     desktopManager.plasma6.enable = true;
   };
