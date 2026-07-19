@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 let
   # Create a derivation containing Traefik config files.
@@ -46,6 +51,8 @@ in
       };
     };
   };
+
+  systemd.services.arion-streaming.wantedBy = lib.mkForce [ ];
 
   environment.systemPackages = with pkgs; [
     arion
