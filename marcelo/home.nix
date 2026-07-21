@@ -30,6 +30,7 @@ in
     ./modules/kitty.nix
     ./modules/kubernetes.nix
     ./modules/neovim.nix
+    ./modules/obs-studio.nix
     ./modules/packages.nix
     ./modules/plasma.nix
     ./modules/secrets.nix
