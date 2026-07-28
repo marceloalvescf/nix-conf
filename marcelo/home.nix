@@ -32,6 +32,7 @@ in
     ./modules/gtk.nix
     ./modules/kubernetes.nix
     ./modules/neovim.nix
+    ./modules/obs-studio.nix
     ./modules/packages.nix
     ./modules/ptyxis.nix
     ./modules/secrets.nix

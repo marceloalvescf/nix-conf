@@ -45,17 +45,6 @@
           Compress = "yes";
         };
       };
-      # extraConfig = ''
-      #   # Limit individual dump to 500MB (enough for most debugging)
-      #   ProcessSizeMax=500M
-      #   ExternalSizeMax=500M
-
-      #   # Keep only 1GB total of dumps
-      #   MaxUse=1G
-
-      #   # Compress dumps to save space
-      #   Compress=yes
-      # '';
     };
   };
 }

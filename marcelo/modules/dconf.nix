@@ -23,7 +23,7 @@ with lib.hm.gvariant;
         "virt-manager.desktop"
         "chromium-browser.desktop"
         "firefox.desktop"
-        "claude-desktop.desktop"
+        "com.anthropic.Claude.desktop"
         "codium.desktop"
         "dev.zed.Zed.desktop"
         "lens-desktop.desktop"

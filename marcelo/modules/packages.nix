@@ -11,10 +11,12 @@
     aria2
     bisq2
     bruno
+    bun
     cdrtools
     docker-compose
     eza
     fastfetch
+    gh
     git
     htop
     jq
@@ -27,7 +29,6 @@
     nvd
     pciutils
     pyenv
-    resources
     sops
     ssh-to-age
     telegram-desktop

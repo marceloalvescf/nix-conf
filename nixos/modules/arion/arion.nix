@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 let
   # Create a derivation containing Traefik config files.
@@ -15,6 +20,10 @@ let
     mkdir -p $out/datasources
     cp ${./grafana/provisioning/datasources/prometheus.yaml} $out/datasources/prometheus.yaml
   '';
+
+  # Read the unit name back from the project instead of hardcoding
+  # "arion-streaming", so it cannot drift from the project definition.
+  streamingService = config.virtualisation.arion.projects.streaming.serviceName;
 in
 
 {
@@ -46,6 +55,11 @@ in
       };
     };
   };
+
+  # Arion wants every project on multi-user.target. Detaching the unit keeps
+  # `streaming` declared but off at boot; start it on demand with
+  # `systemctl start arion-streaming`.
+  systemd.services.${streamingService}.wantedBy = lib.mkForce [ ];
 
   environment.systemPackages = with pkgs; [
     arion
