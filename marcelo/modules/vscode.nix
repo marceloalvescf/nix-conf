@@ -1,21 +1,26 @@
 { pkgs, ... }:
 
 {
-  programs.vscodium = {
+  programs.vscode = {
     enable = true;
+    mutableExtensionsDir = false;
     profiles.default = {
+      enableUpdateCheck = false;
+      enableExtensionUpdateCheck = false;
+
       extensions =
         with pkgs.vscode-extensions;
         [
+          anthropic.claude-code
           catppuccin.catppuccin-vsc
           catppuccin.catppuccin-vsc-icons
           eamodio.gitlens
           hashicorp.terraform
           jnoortheen.nix-ide
           ms-azuretools.vscode-containers
-          ms-azuretools.vscode-docker
           ms-python.debugpy
           ms-python.python
+          ms-python.vscode-pylance
           ms-vscode-remote.remote-ssh
           redhat.vscode-yaml
         ]
@@ -38,13 +43,12 @@
 
         "terminal.integrated.profiles.linux" = {
           fish = {
-            path = "/etc/profiles/per-user/marcelo/bin/fish";
+            path = "${pkgs.fish}/bin/fish";
             args = [ "-l" ];
           };
         };
         "terminal.integrated.defaultProfile.linux" = "fish";
 
-        "security.workspace.trust.untrustedFiles" = "open";
         "editor.minimap.enabled" = false;
         "redhat.telemetry.enabled" = false;
         "git.confirmSync" = false;
@@ -60,6 +64,21 @@
 
         "editor.largeFileOptimizations" = false;
         "workbench.iconTheme" = "catppuccin-mocha";
+
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nil";
+        "nix.formatterPath" = "nixfmt";
+
+        # 4ops.terraform also claims .tf/.tfvars; pin them to hashicorp.terraform
+        # so terraform-ls still activates, leaving .hcl to 4ops for terragrunt.
+        "files.associations" = {
+          "*.tf" = "terraform";
+          "*.tfvars" = "terraform-vars";
+        };
+
+        "[nix]" = {
+          "editor.defaultFormatter" = "jnoortheen.nix-ide";
+        };
 
         "[dockercompose]" = {
           "editor.insertSpaces" = true;
@@ -77,7 +96,7 @@
           "editor.defaultFormatter" = "redhat.vscode-yaml";
         };
 
-        "terminal.external.linuxExec" = "kitty";
+        "terminal.external.linuxExec" = "ptyxis";
         "terminal.integrated.stickyScroll.enabled" = false;
         "terminal.integrated.suggest.enabled" = false;
         "claudeCode.preferredLocation" = "panel";
