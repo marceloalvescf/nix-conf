@@ -62,7 +62,7 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/peripherals/mouse" = {
       accel-profile = "default";
-      speed = -0.5;
+      speed = -0.8;
     };
 
     "org/gnome/desktop/session" = {
