@@ -17,5 +17,11 @@
         "kiali-kind.mapeus.xyz"
       ];
     };
+
+    firewall = {
+      extraCommands = ''
+        iptables -A nixos-fw -p tcp -s 172.19.0.0/16 --dport 11434 -j nixos-fw-accept
+      '';
+    };
   };
 }

@@ -27,6 +27,9 @@
     # Network config
     ./modules/networking.nix
 
+    # Ollama config
+    ./modules/ollama.nix
+
     # OpenRGB config
     ./modules/openrgb.nix
 
