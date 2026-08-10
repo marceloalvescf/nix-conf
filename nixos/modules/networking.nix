@@ -15,6 +15,7 @@
         "grafana-kind.mapeus.xyz"
         "prometheus-kind.mapeus.xyz"
         "kiali-kind.mapeus.xyz"
+        "kagent-ui-kind.mapeus.xyz"
       ];
     };
 
