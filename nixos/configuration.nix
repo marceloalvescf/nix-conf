@@ -21,11 +21,11 @@
     # Hardware config
     ./modules/hardware.nix
 
-    # Logitech Bolt/wireless config (Solaar)
-    ./modules/logitech.nix
-
     # Network config
     ./modules/networking.nix
+
+    # Ollama config
+    ./modules/ollama.nix
 
     # OpenRGB config
     ./modules/openrgb.nix

@@ -1,8 +1,17 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.zed-editor = {
     enable = true;
+
+    mutableUserSettings = false;
+
+    extraPackages = with pkgs; [
+      basedpyright
+      nil
+      nixfmt
+      ruff
+    ];
 
     extensions = [
       "catppuccin"
@@ -17,6 +26,37 @@
     ];
 
     userSettings = {
+      project_panel = {
+        dock = "left";
+      };
+
+      outline_panel = {
+        dock = "left";
+      };
+
+      collaboration_panel = {
+        dock = "left";
+      };
+
+      git_panel = {
+        dock = "left";
+      };
+
+      agent = {
+        dock = "right";
+        default_profile = "ask";
+      };
+
+      agent_servers = {
+        codex-acp = {
+          type = "registry";
+        };
+        claude-acp = {
+          type = "registry";
+          default_config_options.model = "opus";
+        };
+      };
+
       auto_indent = "none";
 
       theme = {
@@ -77,14 +117,18 @@
       };
 
       languages = {
+        Nix = {
+          language_servers = [
+            "nil"
+            "!nixd"
+          ];
+          format_on_save = "on";
+        };
+
         Python = {
           language_servers = [
             "basedpyright"
             "ruff"
-            "!pyright"
-            "!pylsp"
-            "!ty"
-            "!pyrefly"
           ];
           code_actions_on_format = {
             "source.organizeImports.ruff" = true;

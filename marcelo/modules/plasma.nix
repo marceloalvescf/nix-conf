@@ -58,6 +58,8 @@
         repeatRate = 50.0;
       };
 
+      # Attack Shark X11 on its own 2.4G dongle. libinput reports the receiver
+      # name, not the mouse model, and plasma-manager keys kcminputrc on it.
       mice = [
         {
           acceleration = -0.6;
@@ -65,14 +67,23 @@
           enable = true;
           leftHanded = false;
           middleButtonEmulation = false;
-          name = "Logitech USB Receiver Mouse";
+          name = "LXDDZ 2.4G Wireless Device";
           naturalScroll = false;
-          productId = "c548";
+          productId = "fa60";
           scrollSpeed = 1;
-          vendorId = "046d";
+          vendorId = "1d57";
         }
       ];
+    };
 
+    kwin.nightLight = {
+      enable = true;
+      mode = "location";
+      location = {
+        latitude = "-19.60";
+        longitude = "-43.90";
+      };
+      temperature.night = 5000;
     };
 
     powerdevil = {
@@ -149,7 +160,7 @@
                 "applications:chromium-browser.desktop"
                 "applications:firefox.desktop"
                 "applications:com.anthropic.Claude.desktop"
-                "applications:codium.desktop"
+                "applications:code.desktop"
                 "applications:dev.zed.Zed.desktop"
                 "applications:lens-desktop.desktop"
                 "applications:kitty.desktop"
@@ -270,6 +281,11 @@
       }
     ];
 
+    # Display Configuration (scale 175%, adaptive sync Automatic, colour profile
+    # Built-in/EDID) stays manual: KWin keeps it in kwinoutputconfig.json, keyed
+    # by monitor EDID hash, and rewrites it at runtime for brightness and
+    # hotplug. plasma-manager has no module for it, and a store symlink would
+    # stop KWin from saving. Only the XWayland half below is declarative.
     configFile = {
       "baloofilerc"."Basic Settings"."Indexing-Enabled" = false;
       "kdeglobals"."General"."XftAntialias" = true;
