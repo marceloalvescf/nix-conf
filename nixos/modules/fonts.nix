@@ -13,8 +13,9 @@ in
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-color-emoji
-    ubuntu-sans
-    ubuntu-sans-mono
+    roboto
+    roboto-mono
+    roboto-serif
 
     # Nerd fonts
     nf.code-new-roman
@@ -29,9 +30,9 @@ in
     fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = [ "Noto Serif" ];
-        sansSerif = [ "Noto Sans" ];
-        monospace = [ "Noto Sans Mono" ];
+        serif = [ "IBM Plex Serif" ];
+        sansSerif = [ "IBM PLex Sans" ];
+        monospace = [ "IBM Plex Mono" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };

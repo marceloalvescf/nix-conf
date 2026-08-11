@@ -6,6 +6,7 @@
 {
   home.packages = with pkgs; [
     age
+    amdgpu_top
     ansible
     arch-install-scripts
     aria2

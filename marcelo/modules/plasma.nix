@@ -15,27 +15,27 @@
 
     fonts = {
       fixedWidth = {
-        family = "Noto Sans Mono";
+        family = "IBM Plex Mono";
         pointSize = 10;
       };
       general = {
-        family = "Noto Sans";
+        family = "IBM Plex Sans";
         pointSize = 10;
       };
       menu = {
-        family = "Noto Sans";
+        family = "IBM Plex Sans";
         pointSize = 10;
       };
       small = {
-        family = "Noto Sans";
+        family = "IBM Plex Sans";
         pointSize = 8;
       };
       toolbar = {
-        family = "Noto Sans";
+        family = "IBM Plex Sans";
         pointSize = 10;
       };
       windowTitle = {
-        family = "Noto Sans";
+        family = "IBM Plex Sans";
         pointSize = 10;
       };
     };
