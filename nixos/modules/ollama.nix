@@ -5,9 +5,9 @@
     enable = true;
     package = pkgs.ollama-rocm;
 
-    # RX 7600 é gfx1102, mas as libs ROCm oficiais miram gfx1100.
-    # Sem esse override o Ollama costuma não reconhecer a GPU e cair para CPU.
-    rocmOverrideGfx = "11.0.0";
+    # O ROCm 7.2 embarcado já traz kernel nativo para gfx1102 (ver
+    # lib/ollama/rocm_v7_2/rocblas). Reative se a GPU deixar de ser detectada.
+    # rocmOverrideGfx = "11.0.0";
 
     # Escuta em todas as interfaces para que os pods do kind alcancem o host.
     # O acesso é restringido pelo firewall, não pelo bind.
@@ -15,20 +15,30 @@
     port = 11434;
 
     environmentVariables = {
-      OLLAMA_CONTEXT_LENGTH = "16384";
+      # A atenção híbrida do qwen3.5 mantém KV em 8 das 32 layers, ~9 MiB por
+      # 1k tokens. Espaço para logs e manifests sem estourar os 8 GB de VRAM.
+      OLLAMA_CONTEXT_LENGTH = "32768";
 
-      # Antes: "-1" (residente para sempre). Libera a VRAM quando ocioso.
+      # Libera a VRAM quando ocioso.
       OLLAMA_KEEP_ALIVE = "10m";
 
       OLLAMA_NUM_PARALLEL = "1";
       OLLAMA_MAX_LOADED_MODELS = "1";
 
-      # KV cache quantizado: ~2,4GB -> ~1,2GB. Exige flash attention.
+      # Teto de alocação do ollama, não reserva efetiva de VRAM. Não morde em
+      # 32k (6,4 GiB de 7,0 GiB); segura o modelo se o contexto subir rumo ao
+      # teto de ~60k desta GPU.
+      OLLAMA_GPU_OVERHEAD = "1073741824";
+
+      # KV em q4_0: 288 MiB em 32k, contra 1152 MiB em f16. Exige flash attention.
       OLLAMA_FLASH_ATTENTION = "1";
-      OLLAMA_KV_CACHE_TYPE = "q8_0";
+      OLLAMA_KV_CACHE_TYPE = "q4_0";
     };
 
     # Baixa o modelo na ativação, em vez de no primeiro prompt.
-    loadModels = [ "qwen3:8b" ];
+    loadModels = [ "qwen3.5:9b" ];
+
+    # Lista declarativa de modelos
+    syncModels = true;
   };
 }
