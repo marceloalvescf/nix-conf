@@ -89,7 +89,7 @@ The Fish function `nrs` automates the update, lock-file commit, build, diff, and
 
 ## Containers and monitoring
 
-Arion uses Docker to run `traefik`, `portainer`, `autokube`, `streaming`, and `grafana`. The projects share the `proxy` network, and Traefik routes services under `*-sc.mapeus.xyz`.
+Arion uses Docker to run `traefik`, `portainer`, `autokube`, `streaming`, and `grafana`. The projects share the `proxy` network, and Traefik routes services under `*-sc.alvesm.dev`.
 
 `streaming` is declared but no longer starts at boot: its generated unit is detached with `systemd.services.arion-streaming.wantedBy = lib.mkForce [ ]`. Start it on demand with `systemctl start arion-streaming`.
 

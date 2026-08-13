@@ -1,7 +1,7 @@
 http:
   routers:
     cockpit:
-      rule: Host(`cockpit-sc.mapeus.xyz`)
+      rule: Host(`cockpit-sc.alvesm.dev`)
       entryPoints:
         - websecure
       service: cockpit
@@ -26,16 +26,16 @@ tls:
       defaultGeneratedCert:
         resolver: letsencrypt
         domain:
-          main: mapeus.xyz
+          main: alvesm.dev
           sans:
-            - portainer-sc.mapeus.xyz
-            - jellyfin-sc.mapeus.xyz
-            - qbittorrent-sc.mapeus.xyz
-            - radarr-sc.mapeus.xyz
-            - prowlarr-sc.mapeus.xyz
-            - bazarr-sc.mapeus.xyz
-            - jellyseerr-sc.mapeus.xyz
-            - sonarr-sc.mapeus.xyz
-            - grafana-sc.mapeus.xyz
-            - cockpit-sc.mapeus.xyz
-            - autokube-sc.mapeus.xyz
+            - portainer-sc.alvesm.dev
+            - jellyfin-sc.alvesm.dev
+            - qbittorrent-sc.alvesm.dev
+            - radarr-sc.alvesm.dev
+            - prowlarr-sc.alvesm.dev
+            - bazarr-sc.alvesm.dev
+            - jellyseerr-sc.alvesm.dev
+            - sonarr-sc.alvesm.dev
+            - grafana-sc.alvesm.dev
+            - cockpit-sc.alvesm.dev
+            - autokube-sc.alvesm.dev
