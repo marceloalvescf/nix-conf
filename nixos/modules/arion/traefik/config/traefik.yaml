@@ -4,7 +4,6 @@ global:
 api:
   dashboard: true
   insecure: true
-  debug: false
 
 entryPoints:
   web:
@@ -16,9 +15,6 @@ entryPoints:
           scheme: https
   websecure:
     address: ":443"
-
-serversTransport:
-  insecureSkipVerify: true
 
 providers:
   docker:
@@ -35,11 +31,23 @@ certificatesResolvers:
       storage: /certs/acme.json
       dnsChallenge:
         provider: cloudflare
+        # Ask the zone's own nameservers. Public recursive resolvers (and the
+        # LAN router) answer _acme-challenge from cache, which stalls the
+        # propagation check until it times out.
         resolvers:
-        - "1.1.1.1:53"
+        - "james.ns.cloudflare.com:53"
+        - "marjory.ns.cloudflare.com:53"
+        propagation:
+          delayBeforeChecks: 30s
+
 log:
   filePath: "/var/log/traefik.log"
   level: INFO
+  maxSize: 10
+  maxBackups: 3
+  maxAge: 7
+
 accessLog:
   filePath: "/var/log/access.log"
   format: "json"
+  bufferingSize: 100   # batch writes, lighter on flash storage
