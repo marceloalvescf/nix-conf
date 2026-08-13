@@ -1,5 +1,14 @@
 http:
   routers:
+    traefik-dashboard:
+      rule: Host(`traefik-sc.alvesm.dev`)
+      entryPoints:
+        - websecure
+      service: api@internal
+      middlewares:
+        - default-ipallowlist
+        - traefik-dashboard-root-redirect
+      tls: {}
     cockpit:
       rule: Host(`cockpit-sc.alvesm.dev`)
       entryPoints:
@@ -21,6 +30,13 @@ http:
       ipAllowList:
         sourceRange:
           - "192.168.100.0/24"
+    # api@internal only answers under /dashboard/ and /api/; the bare host is a
+    # 404 without this.
+    traefik-dashboard-root-redirect:
+      redirectRegex:
+        regex: "^https://traefik-sc\\.alvesm\\.dev/?$"
+        replacement: "https://traefik-sc.alvesm.dev/dashboard/"
+        permanent: false
   serversTransports:
     insecure-backend:
       insecureSkipVerify: true
