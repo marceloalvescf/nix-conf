@@ -49,6 +49,7 @@ in
     ++ [
       # IA related packages from llm-agents overlay
       llmAgents.chatgpt
+      llmAgents.codex
       llmAgents.claude-desktop
     ];
 }
