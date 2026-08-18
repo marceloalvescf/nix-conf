@@ -95,8 +95,11 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = true;
-      night-light-schedule-from = "18.0";
-      night-light-schedule-to = "06.0";
+      night-light-schedule-automatic = true;
+      night-light-last-coordinates = lib.hm.gvariant.mkTuple [
+        "-19.60"
+        "-43.90"
+      ];
       night-light-temperature = lib.hm.gvariant.mkUint32 4700;
     };
 
