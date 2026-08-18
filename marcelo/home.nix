@@ -6,11 +6,9 @@
 
 let
   # Import packages from flake root
-  claude-desktop = pkgs.callPackage (inputs.self + "/pkgs/claude-desktop/pkg.nix") { };
   lens = import (inputs.self + "/pkgs/lens-desktop/pkg.nix") { inherit pkgs; };
   spotify-xwayland = import (inputs.self + "/pkgs/spotify-xwayland/pkg.nix") { inherit pkgs; };
   attack-shark-x11 = pkgs.callPackage (inputs.self + "/pkgs/attack-shark-x11/pkg.nix") { };
-  chatgpt = pkgs.callPackage (inputs.self + "/pkgs/chatgpt/pkg.nix") { };
 in
 {
   home.username = "marcelo";
@@ -47,10 +45,8 @@ in
 
   home.packages = [
     attack-shark-x11
-    claude-desktop
     lens
     spotify-xwayland
-    chatgpt
   ];
 
   programs.home-manager.enable = true;
