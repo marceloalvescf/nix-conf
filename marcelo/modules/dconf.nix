@@ -22,7 +22,6 @@ with lib.hm.gvariant;
         "org.gnome.TextEditor.desktop"
         "virt-manager.desktop"
         "claude-desktop.desktop"
-        "chatgpt.desktop"
         "chromium-browser.desktop"
         "firefox.desktop"
         "code.desktop"
