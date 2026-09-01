@@ -19,7 +19,7 @@
 
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.portainer.rule" = "Host(`portainer-sc.mapeus.xyz`)";
+          "traefik.http.routers.portainer.rule" = "Host(`portainer-sc.alvesm.dev`)";
           "traefik.http.routers.portainer.entrypoints" = "websecure";
           "traefik.http.routers.portainer.tls" = "true";
           "traefik.http.services.portainer.loadbalancer.server.port" = "9000";

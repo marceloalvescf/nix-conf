@@ -39,7 +39,7 @@
 
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.qbittorrent.rule" = "Host(`qbittorrent-sc.mapeus.xyz`)";
+          "traefik.http.routers.qbittorrent.rule" = "Host(`qbittorrent-sc.alvesm.dev`)";
           "traefik.http.routers.qbittorrent.entrypoints" = "websecure";
           "traefik.http.routers.qbittorrent.tls" = "true";
           "traefik.http.services.qbittorrent.loadbalancer.server.port" = "8080";
@@ -82,7 +82,7 @@
 
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.radarr.rule" = "Host(`radarr-sc.mapeus.xyz`)";
+          "traefik.http.routers.radarr.rule" = "Host(`radarr-sc.alvesm.dev`)";
           "traefik.http.routers.radarr.entrypoints" = "websecure";
           "traefik.http.routers.radarr.tls" = "true";
           "traefik.http.services.radarr.loadbalancer.server.port" = "7878";
@@ -125,7 +125,7 @@
 
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.sonarr.rule" = "Host(`sonarr-sc.mapeus.xyz`)";
+          "traefik.http.routers.sonarr.rule" = "Host(`sonarr-sc.alvesm.dev`)";
           "traefik.http.routers.sonarr.entrypoints" = "websecure";
           "traefik.http.routers.sonarr.tls" = "true";
           "traefik.http.services.sonarr.loadbalancer.server.port" = "8989";
@@ -166,7 +166,7 @@
 
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.bazarr.rule" = "Host(`bazarr-sc.mapeus.xyz`)";
+          "traefik.http.routers.bazarr.rule" = "Host(`bazarr-sc.alvesm.dev`)";
           "traefik.http.routers.bazarr.entrypoints" = "websecure";
           "traefik.http.routers.bazarr.tls" = "true";
           "traefik.http.services.bazarr.loadbalancer.server.port" = "6767";
@@ -223,7 +223,7 @@
 
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.prowlarr.rule" = "Host(`prowlarr-sc.mapeus.xyz`)";
+          "traefik.http.routers.prowlarr.rule" = "Host(`prowlarr-sc.alvesm.dev`)";
           "traefik.http.routers.prowlarr.entrypoints" = "websecure";
           "traefik.http.routers.prowlarr.tls" = "true";
           "traefik.http.services.prowlarr.loadbalancer.server.port" = "9696";
@@ -252,7 +252,7 @@
 
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.jellyfin.rule" = "Host(`jellyfin-sc.mapeus.xyz`)";
+          "traefik.http.routers.jellyfin.rule" = "Host(`jellyfin-sc.alvesm.dev`)";
           "traefik.http.routers.jellyfin.entrypoints" = "websecure";
           "traefik.http.routers.jellyfin.tls" = "true";
           "traefik.http.services.jellyfin.loadbalancer.server.port" = "8096";
@@ -291,7 +291,7 @@
 
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.jellyseerr.rule" = "Host(`jellyseerr-sc.mapeus.xyz`)";
+          "traefik.http.routers.jellyseerr.rule" = "Host(`jellyseerr-sc.alvesm.dev`)";
           "traefik.http.routers.jellyseerr.entrypoints" = "websecure";
           "traefik.http.routers.jellyseerr.tls" = "true";
           "traefik.http.services.jellyseerr.loadbalancer.server.port" = "5055";

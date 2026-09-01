@@ -14,7 +14,7 @@
           TZ = "America/Sao_Paulo";
           GF_SECURITY_ADMIN_USER = "admin";
           GF_USERS_ALLOW_SIGN_UP = "false";
-          GF_SERVER_ROOT_URL = "https://grafana-sc.mapeus.xyz";
+          GF_SERVER_ROOT_URL = "https://grafana-sc.alvesm.dev";
         };
 
         env_file = [
@@ -36,7 +36,7 @@
 
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.grafana.rule" = "Host(`grafana-sc.mapeus.xyz`)";
+          "traefik.http.routers.grafana.rule" = "Host(`grafana-sc.alvesm.dev`)";
           "traefik.http.routers.grafana.entrypoints" = "websecure";
           "traefik.http.routers.grafana.tls" = "true";
           "traefik.http.services.grafana.loadbalancer.server.port" = "3000";

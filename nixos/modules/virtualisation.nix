@@ -35,7 +35,7 @@
     port = 9090;
     allowed-origins = [
       "https://192.168.100.151:9090"
-      "https://cockpit-sc.mapeus.xyz"
+      "https://cockpit-sc.alvesm.dev"
     ];
     plugins = [
       pkgs.cockpit-machines

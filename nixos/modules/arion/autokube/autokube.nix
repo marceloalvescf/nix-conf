@@ -18,7 +18,7 @@
 
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.autokube.rule" = "Host(`autokube-sc.mapeus.xyz`)";
+          "traefik.http.routers.autokube.rule" = "Host(`autokube-sc.alvesm.dev`)";
           "traefik.http.routers.autokube.entrypoints" = "websecure";
           "traefik.http.routers.autokube.tls" = "true";
           "traefik.http.services.autokube.loadbalancer.server.port" = "8080";
