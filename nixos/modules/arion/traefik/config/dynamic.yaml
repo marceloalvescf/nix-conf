@@ -1,17 +1,28 @@
 http:
   routers:
+    traefik-dashboard:
+      rule: Host(`traefik-sc.alvesm.dev`)
+      entryPoints:
+        - websecure
+      service: api@internal
+      middlewares:
+        - default-ipallowlist
+        - traefik-dashboard-root-redirect
+      tls: {}
     cockpit:
-      rule: Host(`cockpit-sc.mapeus.xyz`)
+      rule: Host(`cockpit-sc.alvesm.dev`)
       entryPoints:
         - websecure
       service: cockpit
       middlewares:
         - default-ipallowlist
-      tls:
-        certResolver: letsencrypt
+      tls: {}
   services:
     cockpit:
       loadBalancer:
+        # Cockpit serves a self-signed cert issued for 127.0.0.1, so the
+        # backend hop cannot be verified.
+        serversTransport: insecure-backend
         servers:
           - url: https://192.168.100.151:9090
   middlewares:
@@ -19,23 +30,25 @@ http:
       ipAllowList:
         sourceRange:
           - "192.168.100.0/24"
+    # api@internal only answers under /dashboard/ and /api/; the bare host is a
+    # 404 without this.
+    traefik-dashboard-root-redirect:
+      redirectRegex:
+        regex: "^https://traefik-sc\\.alvesm\\.dev/?$"
+        replacement: "https://traefik-sc.alvesm.dev/dashboard/"
+        permanent: false
+  serversTransports:
+    insecure-backend:
+      insecureSkipVerify: true
 
 tls:
   stores:
     default:
+      # Routers here and in the Docker labels ask for TLS without naming a
+      # resolver, so they fall back to this store. One wildcard covers every
+      # *-sc host. The apex is left out: nothing is served on it, and it would
+      # only add a second TXT value to the same _acme-challenge record.
       defaultGeneratedCert:
         resolver: letsencrypt
         domain:
-          main: mapeus.xyz
-          sans:
-            - portainer-sc.mapeus.xyz
-            - jellyfin-sc.mapeus.xyz
-            - qbittorrent-sc.mapeus.xyz
-            - radarr-sc.mapeus.xyz
-            - prowlarr-sc.mapeus.xyz
-            - bazarr-sc.mapeus.xyz
-            - jellyseerr-sc.mapeus.xyz
-            - sonarr-sc.mapeus.xyz
-            - grafana-sc.mapeus.xyz
-            - cockpit-sc.mapeus.xyz
-            - autokube-sc.mapeus.xyz
+          main: "*.alvesm.dev"
