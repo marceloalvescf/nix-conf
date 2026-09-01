@@ -31,7 +31,7 @@ in
       enable = true;
       defaultFonts = {
         serif = [ "IBM Plex Serif" ];
-        sansSerif = [ "IBM PLex Sans" ];
+        sansSerif = [ "IBM Plex Sans" ];
         monospace = [ "IBM Plex Mono" ];
         emoji = [ "Noto Color Emoji" ];
       };
