@@ -160,6 +160,7 @@
                 "applications:chromium-browser.desktop"
                 "applications:firefox.desktop"
                 "applications:com.anthropic.Claude.desktop"
+                "applications:chatgpt.desktop"
                 "applications:code.desktop"
                 "applications:dev.zed.Zed.desktop"
                 "applications:lens-desktop.desktop"
