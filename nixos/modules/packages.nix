@@ -22,4 +22,10 @@
 
   # Enable flatpak globally
   services.flatpak.enable = true;
+
+  # Install Steam
+  programs.steam = {
+    enable = true;
+    extraPackages = with pkgs; [ gamescope ];
+  };
 }
