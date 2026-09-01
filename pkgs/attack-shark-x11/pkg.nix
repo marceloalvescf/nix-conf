@@ -3,7 +3,7 @@
   stdenv,
   buildNpmPackage,
   fetchFromGitHub,
-  electron_42,
+  electron_43,
   makeWrapper,
   autoPatchelfHook,
   jq,
@@ -11,16 +11,13 @@
 
 buildNpmPackage {
   pname = "attack-shark-x11";
-  version = "1.4.2-unstable-2026-07-26";
+  version = "1.4.3";
 
-  # Pinned to main rather than the v1.4.2 tag: the tag still pulls `usb` from a
-  # GitHub branch, while main takes it from the registry as prebuilt napi-rs
-  # binaries, which is what makes this buildable without network access.
   src = fetchFromGitHub {
     owner = "dressedinblack5";
     repo = "attack-shark-x11-electron";
-    rev = "ecc4f2ad3a90f1990c201c84260d226a3220bc83";
-    hash = "sha256-wmo4c4MOMW/9fjAgY3XI4pjfaKyoqy0lVhXSIDRfbaU=";
+    rev = "v1.4.3";
+    hash = "sha256-n1vcLWDmyVSt3m4e9NUi5zwZ4N1c7ZDkptP/RUQScgo=";
   };
 
   # Upstream ships only bun.lock. Regenerate with:
@@ -30,9 +27,12 @@ buildNpmPackage {
   # prebuilt binary (v42 dropped the ELECTRON_SKIP_BINARY_DOWNLOAD escape hatch)
   # and husky's prepare wants a git checkout. The nixpkgs electron replaces the
   # former and neither is needed to build, so drop both.
+  #
+  # jq runs by store path: buildNpmPackage forwards postPatch to the npm-deps
+  # fetcher but not nativeBuildInputs, so a bare `jq` is off PATH there.
   postPatch = ''
     cp ${./package-lock.json} package-lock.json
-    jq 'del(.scripts.postinstall, .scripts.prepare)' package.json > package.json.new
+    ${lib.getExe jq} 'del(.scripts.postinstall, .scripts.prepare)' package.json > package.json.new
     mv package.json.new package.json
 
     # The DevTools call is gated on @electron-toolkit's `is.dev`, which is just
@@ -43,7 +43,7 @@ buildNpmPackage {
       --replace-fail "mainWindow.webContents.openDevTools();" ""
   '';
 
-  npmDepsHash = "sha256-CijCAkLMQlg6gOw/gXRmmyTDl/g/jyPcYprJEEDEd38=";
+  npmDepsHash = "sha256-+eVXKMUDMXL/7Ef9f4jf+xjIfUS4SFVrlEpumIv6DFg=";
 
   # electron-vite 5 declares a peer range of vite ^5||^6||^7 while upstream
   # pins vite 8. bun tolerates the mismatch, npm aborts without this.
@@ -76,7 +76,7 @@ buildNpmPackage {
       cp -r node_modules/@node-usb/. "${appDir}/node_modules/@node-usb/"
       cp -r node_modules/@electron-toolkit/utils "${appDir}/node_modules/@electron-toolkit/"
 
-      install -Dm644 assets/atackshark.png "$out/share/pixmaps/attack-shark-x11.png"
+      install -Dm644 assets/attack-shark.png "$out/share/pixmaps/attack-shark-x11.png"
 
       # Icon= is an absolute store path because a home-manager profile install
       # never regenerates the GNOME icon theme cache, so a bare name resolves to
@@ -94,7 +94,7 @@ buildNpmPackage {
       Keywords=mouse;dpi;gaming;
       EOF
 
-      makeWrapper "${lib.getExe electron_42}" "$out/bin/attack-shark-x11" \
+      makeWrapper "${lib.getExe electron_43}" "$out/bin/attack-shark-x11" \
         --add-flags "${appDir}" \
         --add-flags "--ozone-platform-hint=auto" \
         --inherit-argv0
