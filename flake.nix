@@ -30,6 +30,11 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -40,6 +45,7 @@
       home-manager,
       plasma-manager,
       sops-nix,
+      llm-agents,
       ...
     }:
     {

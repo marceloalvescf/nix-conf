@@ -40,12 +40,11 @@ This repository is machine-specific. It can be used as a reference, but it is no
 
 `pkgs/` holds derivations for applications that upstream does not provide in the desired form:
 
-- `attack-shark-x11` — Electron configuration app for the Attack Shark X11 mouse, built from a pinned `main` commit with a regenerated `package-lock.json`
-- `claude-desktop` — repackages the official `.deb`, repairs the ELF interpreter and rpaths, removes the setuid `chrome-sandbox`, and keeps GPU acceleration working
+- `attack-shark-x11` — Electron configuration app for the Attack Shark X11 mouse, built from the upstream `v1.4.3` tag with a regenerated `package-lock.json`
 - `lens-desktop` — wraps the upstream AppImage
 - `plasmoids/` — third-party Plasma widgets: Andromeda Launcher, Resources Monitor, and Weather Widget Plus
 
-The first three are imported in `marcelo/home.nix`; the plasmoids are installed from `marcelo/modules/plasma.nix`. The Fish function `claude-desktop-update` compares the pinned Claude Desktop version against the Anthropic apt repository.
+`attack-shark-x11` and `lens-desktop` are imported in `marcelo/home.nix`; the plasmoids are installed from `marcelo/modules/plasma.nix`. Claude Desktop is no longer packaged here: it comes from the `llm-agents` flake input, and `marcelo/modules/packages.nix` ships the desktop entry that carries the window-matching, GPU, and icon fixes.
 
 ## Common operations
 
