@@ -21,7 +21,7 @@ with lib.hm.gvariant;
         "org.gnome.Nautilus.desktop"
         "org.gnome.TextEditor.desktop"
         "virt-manager.desktop"
-        "claude-desktop.desktop"
+        "com.anthropic.Claude.desktop"
         "chromium-browser.desktop"
         "firefox.desktop"
         "code.desktop"
@@ -30,7 +30,7 @@ with lib.hm.gvariant;
         "org.gnome.Ptyxis.desktop"
         "org.telegram.desktop.desktop"
         "spotify.desktop"
-        "com.valvesoftware.Steam.desktop"
+        "steam.desktop"
       ];
     };
 

@@ -7,38 +7,72 @@
 let
   llmAgents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 
-  # Three fixes on top of the llm-agents derivation:
-  #
-  # 1. ANGLE dlopen()s the native "libEGL.so.1" by soname to reach the real
-  #    GPU driver. NixOS has no ldconfig cache, so without the driver dir on
-  #    the library path that lookup fails, GPU init aborts, and Chromium falls
-  #    back to software rendering — making the UI sluggish. The upstream
-  #    wrapper only puts the app dir on LD_LIBRARY_PATH, so add the impure
-  #    system driver path on top.
-  #
-  # 2. GNOME resolves Icon= against its theme cache, which a home-manager
-  #    profile install never regenerates; point at the absolute store PNG so
-  #    the launcher icon renders without a cache lookup.
-  #
-  # 3. The Electron app reports "com.anthropic.Claude" as its X11 WM_CLASS /
-  #    Wayland app_id, but upstream declares StartupWMClass=claude-desktop.
-  #    GNOME then fails to map the window onto the launcher and shows a
-  #    separate, generic dash entry named after the raw app id.
-  claude-desktop = llmAgents.claude-desktop.overrideAttrs (old: {
-    postFixup = (old.postFixup or "") + ''
-      wrapProgram "$out/bin/claude-desktop" \
-        --prefix LD_LIBRARY_PATH : "/run/opengl-driver/lib"
-
-      substituteInPlace "$out/share/applications/claude-desktop.desktop" \
-        --replace-fail 'Icon=claude-desktop' \
-          "Icon=$out/share/icons/hicolor/256x256/apps/claude-desktop.png" \
-        --replace-fail 'StartupWMClass=claude-desktop' \
-          'StartupWMClass=com.anthropic.Claude'
-    '';
-  });
+  # Upstream now ships claude-desktop as a buildFHSEnv/bwrap wrapper, whose
+  # builder sets `buildCommand`. stdenv's genericBuild returns right after
+  # evaluating it, so fixupPhase never runs and any postFixup added via
+  # overrideAttrs is silently dropped. $out/share is also a symlink into the
+  # unwrapped package, so patching the desktop entry in the derivation is out.
+  # Ship our own entry instead — it shadows the package one by desktop file ID
+  # (XDG_DATA_HOME wins over the profile), and survives upstream repackaging.
+  claude-desktop = llmAgents.claude-desktop;
 
 in
 {
+  # The Electron app reports "com.anthropic.Claude" as its Wayland app_id /
+  # X11 WM_CLASS, while upstream installs claude-desktop.desktop declaring
+  # StartupWMClass=claude-desktop. GNOME matches windows to entries by desktop
+  # file ID first, then StartupWMClass; both miss, so the window gets its own
+  # generic dash entry labelled with the raw app id. Publish the entry under
+  # the app id, declare the matching StartupWMClass, and hide the upstream one.
+  #
+  # Two more fixes folded into the entry:
+  #
+  # 1. ANGLE dlopen()s the native "libEGL.so.1" by soname to reach the real GPU
+  #    driver. NixOS has no ldconfig cache and the FHS root ships no GL libs,
+  #    so that lookup fails, GPU init aborts, and Chromium falls back to
+  #    software rendering. bwrap inherits the environment and the inner wrapper
+  #    only prefixes LD_LIBRARY_PATH, so exporting the driver dir here reaches
+  #    the app.
+  #
+  # 2. GNOME resolves Icon= against its theme cache, which a home-manager
+  #    profile install never regenerates; point at the absolute store PNG.
+  xdg.desktopEntries = {
+    "com.anthropic.Claude" = {
+      name = "Claude";
+      genericName = "AI Assistant";
+      comment = "Desktop application for Claude.ai";
+      exec = "env LD_LIBRARY_PATH=/run/opengl-driver/lib claude-desktop %U";
+      icon = "${claude-desktop}/share/icons/hicolor/256x256/apps/claude-desktop.png";
+      categories = [
+        "Utility"
+        "Development"
+      ];
+      mimeType = [ "x-scheme-handler/claude" ];
+      startupNotify = true;
+      settings = {
+        Keywords = "AI;Chat;Assistant;Claude;Code;LLM";
+        SingleMainWindow = "true";
+        StartupWMClass = "com.anthropic.Claude";
+      };
+      actions = {
+        NewChat = {
+          name = "New chat";
+          exec = "claude-desktop claude://claude.ai/new";
+        };
+        NewCode = {
+          name = "New Claude Code session";
+          exec = "claude-desktop claude://code/new";
+        };
+      };
+    };
+
+    claude-desktop = {
+      name = "Claude";
+      exec = "claude-desktop %U";
+      noDisplay = true;
+    };
+  };
+
   home.packages =
     with pkgs;
     [
