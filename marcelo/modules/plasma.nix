@@ -167,6 +167,7 @@
                 "applications:kitty.desktop"
                 "applications:org.telegram.desktop.desktop"
                 "applications:spotify.desktop"
+                "applications:steam.desktop"
               ];
               behavior.showTasks = {
                 onlyInCurrentDesktop = false;
