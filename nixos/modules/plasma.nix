@@ -34,4 +34,9 @@
     konsole
     plasma-browser-integration
   ];
+
+  # greetd runs on a VT, so pam_kwallet5 sees PAM_TTY=tty1 and skips its session
+  # hook ("not a graphical session"), leaving kwalletd6 to prompt. force_run
+  # bypasses that check so the login password reaches the wallet.
+  security.pam.services.login.kwallet.forceRun = true;
 }
