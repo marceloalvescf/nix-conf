@@ -35,5 +35,31 @@
         };
       };
     };
+
+    # kind's node image ships /usr/lib/sysctl.d/10-coredump-debian.conf with
+    # kernel.core_pattern=core. Its privileged systemd applies that against the
+    # host's non-namespaced sysctl, so dumps bypass systemd-coredump and land as
+    # ./core.<pid> in each crashing process' cwd. Re-assert the pipe handler.
+    services.restore-core-pattern = {
+      description = "Restore kernel.core_pattern clobbered by privileged containers";
+      after = [ "docker.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${config.systemd.package}/lib/systemd/systemd-sysctl --prefix=/proc/sys/kernel/core_pattern";
+      };
+    };
+
+    timers.restore-core-pattern = {
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnBootSec = "30s";
+        OnUnitActiveSec = "5min";
+      };
+    };
+
+    # Belt for the window before the timer fires: RLIMIT_CORE=0 blocks
+    # kernel-written core files, but is ignored on the systemd-coredump pipe.
+    settings.Manager.DefaultLimitCORE = "0";
+    user.settings.Manager.DefaultLimitCORE = "0";
   };
 }
