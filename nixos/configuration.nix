@@ -48,6 +48,9 @@
     # Services config
     ./modules/services.nix
 
+    # Sunshine config
+    ./modules/sunshine.nix
+
     # System config
     ./modules/system.nix
 
