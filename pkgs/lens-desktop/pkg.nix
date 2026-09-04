@@ -16,7 +16,7 @@ let
     platforms = [ "x86_64-linux" ];
   };
 
-  appimageContents = pkgs.appimageTools.extractType2 {
+  appimageContents = pkgs.appimageTools.extract {
     inherit pname version src;
   };
 in
