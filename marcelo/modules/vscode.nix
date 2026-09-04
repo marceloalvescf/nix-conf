@@ -31,6 +31,13 @@
             version = "0.2.5";
             sha256 = "sha256-y5LljxK8V9Fir9EoG8g9N735gISrlMg3czN21qF/KjI=";
           }
+          {
+            name = "chatgpt";
+            publisher = "openai";
+            version = "26.5901.22334";
+            arch = "linux-x64";
+            sha256 = "sha256-zZzQbFv8yOGJclh9BKydCLBBUuv23kJiM93IErBZM/8=";
+          }
         ];
       userSettings = {
         "editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
