@@ -6,6 +6,20 @@
 
 let
   llmAgents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+  chatgpt = pkgs.symlinkJoin {
+    name = "chatgpt";
+    paths = [ llmAgents.chatgpt ];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+
+    postBuild = ''
+      wrapProgram "$out/bin/chatgpt" \
+        --unset NIXOS_OZONE_WL \
+        --set QT_QPA_PLATFORM xcb \
+        --set QT_QPA_PLATFORM_PLUGIN_PATH \
+          "${pkgs.qt5.qtbase.bin}/${pkgs.qt5.qtbase.qtPluginPrefix}/platforms" \
+        --add-flags "--ozone-platform=x11"
+    '';
+  };
 
   # Upstream now ships claude-desktop as a buildFHSEnv/bwrap wrapper, whose
   # builder sets `buildCommand`. stdenv's genericBuild returns right after
@@ -37,6 +51,33 @@ in
   # 2. GNOME resolves Icon= against its theme cache, which a home-manager
   #    profile install never regenerates; point at the absolute store PNG.
   xdg.desktopEntries = {
+    # Match the observed XWayland resource class so GNOME associates the window.
+    chatgpt = {
+      name = "ChatGPT";
+      comment = "ChatGPT by OpenAI";
+      genericName = "AI assistant";
+      exec = "chatgpt %U";
+      icon = "${chatgpt}/share/pixmaps/chatgpt.png";
+      categories = [
+        "Utility"
+        "Development"
+      ];
+      startupNotify = true;
+      mimeType = [
+        "x-scheme-handler/codex"
+        "x-scheme-handler/http"
+        "x-scheme-handler/https"
+        "text/csv"
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        "text/tab-separated-values"
+        "application/vnd.ms-excel"
+        "application/vnd.ms-excel.sheet.macroEnabled.12"
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      ];
+      settings.StartupWMClass = "Chatgpt";
+    };
+
     "com.anthropic.Claude" = {
       name = "Claude";
       genericName = "AI Assistant";
@@ -112,6 +153,7 @@ in
     ]
     ++ [
       # AI related packages from llm-agents overlay
+      chatgpt
       claude-desktop
     ];
 }

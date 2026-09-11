@@ -2,11 +2,11 @@
 
 let
   pname = "lens-desktop";
-  version = "2026.6.260931";
+  version = "2026.9.20601";
 
   src = pkgs.fetchurl {
     url = "https://api.k8slens.dev/binaries/Lens-${version}-latest.x86_64.AppImage";
-    sha256 = "sha256-5kbSdOuMCL+TkmNVzTyH7hArt4DT4eJoBTHrfXEBMeo=";
+    sha256 = "sha256-pAtzfgjd7q8qXXYRZEdjNkqwcC+HIPzZ/8N0HIlqWTw=";
   };
 
   meta = {
@@ -16,7 +16,7 @@ let
     platforms = [ "x86_64-linux" ];
   };
 
-  appimageContents = pkgs.appimageTools.extractType2 {
+  appimageContents = pkgs.appimageTools.extract {
     inherit pname version src;
   };
 in
@@ -42,8 +42,7 @@ pkgs.appimageTools.wrapType2 {
 
     substituteInPlace $out/share/applications/${pname}.desktop \
       --replace-fail 'Exec=AppRun' "Exec=${pname}" \
-      --replace-fail 'Icon=lens-desktop' "Icon=$out/share/icons/hicolor/512x512/apps/${pname}.png" \
-      --replace-fail 'StartupWMClass=Lens' 'StartupWMClass=lens'
+      --replace-fail 'Icon=lens-desktop' "Icon=$out/share/icons/hicolor/512x512/apps/${pname}.png"
   '';
 
   extraPkgs = pkgs: [ pkgs.nss_latest ];

@@ -27,9 +27,6 @@
     # Network config
     ./modules/networking.nix
 
-    # Ollama config
-    ./modules/ollama.nix
-
     # OpenRGB config
     ./modules/openrgb.nix
 
@@ -44,6 +41,9 @@
 
     # Services config
     ./modules/services.nix
+
+    # Sunshine config
+    ./modules/sunshine.nix
 
     # System config
     ./modules/system.nix

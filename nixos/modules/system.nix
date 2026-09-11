@@ -1,26 +1,15 @@
-{ ... }:
+{ config, ... }:
 
 {
   # Made /etc/hosts file writable
   environment.etc.hosts.mode = "0755";
 
   # Set your time zone.
-  time.timeZone = "America/Sao_Paulo";
+  time.timeZone = "Etc/GMT+3";
 
   # Locale related settings
   i18n = {
-    defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
-    };
+    defaultLocale = "C.UTF-8";
     inputMethod = {
       enable = true;
       type = "ibus";
@@ -46,5 +35,29 @@
         };
       };
     };
+
+    # kind's node image ships /usr/lib/sysctl.d/10-coredump-debian.conf with
+    # kernel.core_pattern=core. Its privileged systemd applies that against the
+    # host's non-namespaced sysctl, so dumps bypass systemd-coredump and land as
+    # ./core.<pid> in each crashing process' cwd. Re-assert the pipe handler.
+    services.restore-core-pattern = {
+      description = "Restore kernel.core_pattern clobbered by privileged containers";
+      after = [ "docker.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${config.systemd.package}/lib/systemd/systemd-sysctl --prefix=/proc/sys/kernel/core_pattern";
+      };
+    };
+
+    timers.restore-core-pattern = {
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnBootSec = "30s";
+        OnUnitActiveSec = "5min";
+      };
+    };
+
+    settings.Manager.DefaultLimitCORE = "0";
+    user.settings.Manager.DefaultLimitCORE = "0";
   };
 }
