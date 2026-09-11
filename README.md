@@ -13,7 +13,6 @@ This repository is machine-specific. It can be used as a reference, but it is no
 - Docker/Arion services behind Traefik
 - Libvirt/KVM and Cockpit for local virtualization
 - Host-native Prometheus with containerized Grafana
-- Host-native Ollama on ROCm, reachable from kind clusters
 - SOPS-managed system and user secrets
 - Local Nix packages for applications not provided in the desired form upstream
 
@@ -87,8 +86,6 @@ Arion uses Docker to run `traefik`, `portainer`, `autokube`, `streaming`, and `g
 `streaming` is declared but no longer starts at boot: its generated unit is detached with `systemd.services.<streaming unit>.wantedBy = lib.mkForce [ ]`. Start it on demand with `systemctl start arion-streaming`.
 
 Prometheus and node-exporter run directly on the host. Grafana reaches Prometheus through `host.docker.internal`. Media data is stored under `/mnt/myexternaldisk/streaming`; application configuration is stored under `/home/marcelo/docker/streaming` or Docker volumes.
-
-Ollama also runs directly on the host, on the ROCm build, and binds to `0.0.0.0:11434` so pods in `kind` clusters can reach it. Access is restricted by a firewall rule scoped to the Docker network, not by the bind address. See `nixos/modules/ollama.nix` and the `firewall.extraCommands` entry in `nixos/modules/networking.nix`.
 
 Most container images use upstream mutable tags, so rebuilding NixOS does not fully pin their runtime contents.
 
