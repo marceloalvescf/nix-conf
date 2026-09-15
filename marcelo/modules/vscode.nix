@@ -107,6 +107,7 @@
         "terminal.integrated.stickyScroll.enabled" = false;
         "terminal.integrated.suggest.enabled" = false;
         "claudeCode.preferredLocation" = "panel";
+        "gitlens.codeLens.scopes" = "[]";
       };
     };
   };
