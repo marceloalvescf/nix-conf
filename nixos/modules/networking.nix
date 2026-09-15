@@ -16,6 +16,8 @@
         "prometheus-kind.alvesm.dev"
         "kiali-kind.alvesm.dev"
         "kagent-ui-kind.alvesm.dev"
+        "thanos-queryfrontend-kind.alvesm.dev"
+        "kibana-kind.alvesm.dev"
       ];
     };
   };
