@@ -1,4 +1,5 @@
 result
+.vscode
 
 # SOPS age keys - NEVER commit these!
 **/keys.txt
