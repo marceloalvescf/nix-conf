@@ -28,8 +28,10 @@ let
   # Create a derivation containing Grafana provisioning config files.
   # This ensures the store path is properly tracked and won't be garbage collected.
   grafanaProvisioningDir = pkgs.runCommand "grafana-provisioning" { } ''
-    mkdir -p $out/datasources
+    mkdir -p $out/datasources $out/dashboards
     cp ${./grafana/provisioning/datasources/prometheus.yaml} $out/datasources/prometheus.yaml
+    cp ${./grafana/provisioning/dashboards/dashboards.yaml} $out/dashboards/dashboards.yaml
+    cp ${./grafana/provisioning/dashboards/libvirt.json} $out/dashboards/libvirt.json
   '';
 
   # Read the unit name back from the project instead of hardcoding
