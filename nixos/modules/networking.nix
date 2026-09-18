@@ -11,13 +11,13 @@
 
     # Add static hosts to /etc/hosts file
     hosts = {
-      "172.19.0.10" = [
-        "grafana-kind.alvesm.dev"
-        "prometheus-kind.alvesm.dev"
-        "kiali-kind.alvesm.dev"
-        "kagent-ui-kind.alvesm.dev"
-        "thanos-queryfrontend-kind.alvesm.dev"
-        "kibana-kind.alvesm.dev"
+      "10.10.0.50" = [
+        "grafana-talos.alvesm.dev"
+        "prometheus-talos.alvesm.dev"
+        "kiali-talos.alvesm.dev"
+        "kagent-ui-talos.alvesm.dev"
+        "thanos-queryfrontend-talos.alvesm.dev"
+        "kibana-talos.alvesm.dev"
       ];
     };
   };
