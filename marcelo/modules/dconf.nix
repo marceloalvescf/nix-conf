@@ -24,7 +24,6 @@ with lib.hm.gvariant;
         "chromium-browser.desktop"
         "firefox.desktop"
         "com.anthropic.Claude.desktop"
-        "chatgpt.desktop"
         "code.desktop"
         "dev.zed.Zed.desktop"
         "lens-desktop.desktop"
