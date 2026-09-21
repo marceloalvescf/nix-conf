@@ -11,7 +11,7 @@
     };
 
     font = {
-      name = "IBM Plex Sans";
+      name = "Noto Sans";
       size = 10;
     };
 
