@@ -1,4 +1,14 @@
-{ pkgs, ... }:
+{
+  lib,
+  osConfig,
+  pkgs,
+  ...
+}:
+
+let
+  rootDisk = "disk/${lib.removePrefix "/dev/disk/by-uuid/" osConfig.fileSystems."/".device}";
+  rootDiskFace = "starscream.ksysguard.piechart-small";
+in
 
 {
   programs.plasma = {
@@ -258,6 +268,32 @@
             ];
           }
           {
+            systemMonitor = {
+              title = "Root";
+              showTitle = false;
+              displayStyle = rootDiskFace;
+              sensors = [
+                {
+                  name = "${rootDisk}/usedPercent";
+                  color = "61,174,233";
+                  label = "Root";
+                }
+              ];
+              totalSensors = [ "${rootDisk}/usedPercent" ];
+              textOnlySensors = [
+                "${rootDisk}/used"
+                "${rootDisk}/free"
+                "${rootDisk}/total"
+              ];
+              # plasma-manager writes `range` to the stock piechart group only.
+              settings."${rootDiskFace}/General" = {
+                rangeAuto = false;
+                rangeFrom = 0;
+                rangeTo = 100;
+              };
+            };
+          }
+          {
             systemTray.items = {
               # devicenotifier and brightness intentionally absent: "never show".
               extra = [
@@ -324,6 +360,7 @@
     (pkgs.callPackage ../../pkgs/plasmoids/andromeda-launcher.nix { })
     (pkgs.callPackage ../../pkgs/plasmoids/resources-monitor.nix { })
     (pkgs.callPackage ../../pkgs/plasmoids/weather-widget-plus.nix { })
+    (pkgs.callPackage ../../pkgs/sensorfaces/piechart-small.nix { })
   ];
 
   qt = {
