@@ -48,9 +48,6 @@
       };
 
       agent_servers = {
-        codex-acp = {
-          type = "registry";
-        };
         claude-acp = {
           type = "registry";
           default_config_options.model = "opus";

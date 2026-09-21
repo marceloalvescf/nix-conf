@@ -6,7 +6,6 @@
 
 let
   llmAgents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
-  chatgpt = llmAgents.chatgpt;
 
   # Upstream now ships claude-desktop as a buildFHSEnv/bwrap wrapper, whose
   # builder sets `buildCommand`. stdenv's genericBuild returns right after
@@ -114,7 +113,6 @@ in
     ]
     ++ [
       # AI related packages from llm-agents overlay
-      chatgpt
       claude-desktop
     ];
 }
