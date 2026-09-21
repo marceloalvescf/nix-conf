@@ -12,7 +12,8 @@ This repository is machine-specific. It can be used as a reference, but it is no
 - Fish, Kitty, tmux, Neovim, VS Code, Zed, Kubernetes, Terraform, and Ansible tooling
 - Docker/Arion services behind Traefik
 - Libvirt/KVM and Cockpit for local virtualization
-- Host-native Prometheus with containerized Grafana
+- Sunshine game streaming with KMS capture
+- Host-native Prometheus with containerized Grafana and a provisioned libvirt dashboard
 - SOPS-managed system and user secrets
 - Local Nix packages for applications not provided in the desired form upstream
 
@@ -35,6 +36,21 @@ This repository is machine-specific. It can be used as a reference, but it is no
 └── docs/                        # Machine setup and recovery notes
 ```
 
+## Desktop
+
+The system runs Plasma 6 on Wayland; X11 and SDDM are disabled. greetd starts `tuigreet --cmd startplasma-wayland` in `nixos/modules/plasma.nix`, and `pam_kwallet5` runs with `force_run` so the VT login still unlocks KWallet.
+
+User settings are declared with Plasma Manager in `marcelo/modules/plasma.nix`: Breeze Dark with Papirus-Dark icons, Noto Sans/Noto Sans Mono fonts, input devices, night light, power management, the screen locker, and the bottom panel. The panel carries the third-party plasmoids from `pkgs/plasmoids/` plus a System Monitor pie chart for root filesystem usage, whose sensor ID is derived from `fileSystems."/"`.
+
+Panels, themes, and the wallpaper are applied by the Plasma Manager autostart script at login. To apply them after a switch without logging out:
+
+```sh
+~/.local/share/plasma-manager/run_all.sh
+qdbus org.kde.KWin /KWin reconfigure
+```
+
+Restart the shell with `systemctl --user restart plasma-plasmashell` when a new widget or sensor face was installed. Input devices and fonts in already open applications still need a new login.
+
 ## Local packages
 
 `pkgs/` holds derivations for applications that upstream does not provide in the desired form:
@@ -42,8 +58,9 @@ This repository is machine-specific. It can be used as a reference, but it is no
 - `attack-shark-x11` — Electron configuration app for the Attack Shark X11 mouse, built from the upstream `v1.4.3` tag with a regenerated `package-lock.json`
 - `lens-desktop` — wraps the upstream AppImage
 - `plasmoids/` — third-party Plasma widgets: Andromeda Launcher, Resources Monitor, and Weather Widget Plus
+- `sensorfaces/piechart-small.nix` — copy of the stock Plasma Pie Chart sensor face with a 2pt smaller center value, rebuilt from the installed `libksysguard`
 
-`attack-shark-x11` and `lens-desktop` are imported in `marcelo/home.nix`; the plasmoids are installed from `marcelo/modules/plasma.nix`. Claude Desktop is no longer packaged here: it comes from the `llm-agents` flake input, and `marcelo/modules/packages.nix` ships the desktop entry that carries the window-matching, GPU, and icon fixes.
+`attack-shark-x11` and `lens-desktop` are imported in `marcelo/home.nix`; the plasmoids and the sensor face are installed from `marcelo/modules/plasma.nix`. Claude Desktop is no longer packaged here: it comes from the `llm-agents` flake input, and `marcelo/modules/packages.nix` ships the desktop entry that carries the window-matching, GPU, and icon fixes.
 
 ## Common operations
 
@@ -85,7 +102,7 @@ Arion uses Docker to run `traefik`, `portainer`, `autokube`, `streaming`, and `g
 
 `streaming` is declared but no longer starts at boot: its generated unit is detached with `systemd.services.<streaming unit>.wantedBy = lib.mkForce [ ]`. Start it on demand with `systemctl start arion-streaming`.
 
-Prometheus and node-exporter run directly on the host. Grafana reaches Prometheus through `host.docker.internal`. Media data is stored under `/mnt/myexternaldisk/streaming`; application configuration is stored under `/home/marcelo/docker/streaming` or Docker volumes.
+Prometheus, node-exporter, and the libvirt exporter run directly on the host. Grafana reaches Prometheus through `host.docker.internal`; its datasource (with a pinned UID) and the libvirt dashboard are provisioned from `nixos/modules/arion/grafana/provisioning/` with UI edits disabled. Media data is stored under `/mnt/myexternaldisk/streaming`; application configuration is stored under `/home/marcelo/docker/streaming` or Docker volumes.
 
 Most container images use upstream mutable tags, so rebuilding NixOS does not fully pin their runtime contents.
 
