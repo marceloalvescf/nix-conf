@@ -21,6 +21,9 @@
     # Hardware config
     ./modules/hardware.nix
 
+    # Memory config (zram swap)
+    ./modules/memory.nix
+
     # Network config
     ./modules/networking.nix
 

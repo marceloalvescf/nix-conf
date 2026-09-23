@@ -8,6 +8,7 @@ This repository is machine-specific. It can be used as a reference, but it is no
 
 - NixOS and Home Manager evaluated together from one flake
 - Lanzaboote Secure Boot and USB-key LUKS unlock on the XanMod kernel
+- zram swap (zstd, 16 GiB cap) with kernel reclaim tuned for compressed swap, no disk swap
 - Plasma 6, greetd/tuigreet, PipeWire, AMD graphics, ROCm, Bluetooth, and OpenRGB
 - Fish, Kitty, tmux, Neovim, VS Code, Zed, Kubernetes, Terraform, and Ansible tooling
 - Docker/Arion services behind Traefik
