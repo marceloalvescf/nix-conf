@@ -30,9 +30,9 @@ in
     fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = [ "IBM Plex Serif" ];
-        sansSerif = [ "IBM Plex Sans" ];
-        monospace = [ "IBM Plex Mono" ];
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Adwaita Sans" ];
+        monospace = [ "Adwaita Mono" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };
