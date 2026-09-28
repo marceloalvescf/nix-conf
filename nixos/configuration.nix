@@ -24,6 +24,9 @@
     # Hardware config
     ./modules/hardware.nix
 
+    # Memory config (zram swap)
+    ./modules/memory.nix
+
     # Network config
     ./modules/networking.nix
 
@@ -35,6 +38,9 @@
 
     # Prometheus related config
     ./modules/prometheus.nix
+
+    # ROCm config
+    ./modules/rocm.nix
 
     # SOPS config
     ./modules/secrets.nix
@@ -53,9 +59,6 @@
 
     # Virtualization config
     ./modules/virtualisation.nix
-
-    # ROCm config
-    ./modules/rocm.nix
   ];
 
   # Enable flakes
