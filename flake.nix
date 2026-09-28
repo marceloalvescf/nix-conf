@@ -55,6 +55,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                backupCommand = "f() { mv \"$1\" \"$1.bak-$(date +%Y%m%d-%H%M%S)\"; }; f";
                 users.marcelo = import ./marcelo/home.nix;
                 extraSpecialArgs = {
                   inherit inputs;

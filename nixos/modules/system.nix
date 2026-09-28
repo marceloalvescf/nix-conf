@@ -57,6 +57,8 @@
       };
     };
 
+    # Belt for the window before the timer fires: RLIMIT_CORE=0 blocks
+    # kernel-written core files, but is ignored on the systemd-coredump pipe.
     settings.Manager.DefaultLimitCORE = "0";
     user.settings.Manager.DefaultLimitCORE = "0";
   };

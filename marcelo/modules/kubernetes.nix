@@ -10,6 +10,7 @@
     kubectl
     kubectx
     kubernetes-helm
+    talosctl
     velero
   ];
 

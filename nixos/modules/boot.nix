@@ -3,6 +3,7 @@
 {
   boot = {
     kernelParams = [ "quiet" ];
+
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
     loader = {

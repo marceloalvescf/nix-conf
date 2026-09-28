@@ -75,5 +75,7 @@ in
   # `systemctl start arion-streaming`.
   systemd.services.${streamingService}.wantedBy = lib.mkForce [ ];
 
-  environment.systemPackages = [ arion ];
+  environment.systemPackages = [
+    arion
+  ];
 }

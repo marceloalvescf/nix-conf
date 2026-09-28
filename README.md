@@ -8,11 +8,13 @@ This repository is machine-specific. It can be used as a reference, but it is no
 
 - NixOS and Home Manager evaluated together from one flake
 - Lanzaboote Secure Boot and USB-key LUKS unlock on the XanMod kernel
+- zram swap (zstd, 16 GiB cap) with kernel reclaim tuned for compressed swap, no disk swap
 - GNOME on Wayland with GDM, PipeWire, AMD graphics, ROCm, Bluetooth, and OpenRGB
 - Fish, Starship, Ptyxis, tmux, Neovim, VS Code, Zed, Kubernetes, Terraform, and Ansible tooling
 - Docker/Arion services behind Traefik
 - Libvirt/KVM and Cockpit for local virtualization
-- Host-native Prometheus with containerized Grafana
+- Sunshine game streaming with KMS capture
+- Host-native Prometheus with containerized Grafana and a provisioned libvirt dashboard
 - SOPS-managed system and user secrets
 - Local Nix packages for applications not provided in the desired form upstream
 
@@ -41,7 +43,7 @@ The system runs GNOME on Wayland; X11 is disabled and GDM is the display manager
 
 The user side lives in `marcelo/modules/gnome.nix`, which installs the shell extensions and GNOME utilities and imports `marcelo/modules/dconf.nix`. That file declares the desktop state itself — enabled extensions, dock favorites, fonts, theme, input sources, keybindings, night light, Nautilus defaults, and the Ptyxis profile. Settings changed through the GNOME UI are overwritten on the next switch unless they are also written there.
 
-Ptyxis is the terminal and starts Fish through a custom command. Fonts are Adwaita Sans/Mono and JetBrainsMono Nerd Font; the GTK theme is `adw-gtk3-dark` with Papirus-Dark icons.
+Ptyxis is the terminal and starts Fish through a custom command. Fonts are Adwaita Sans/Adwaita Mono and JetBrainsMono Nerd Font; the GTK theme is `adw-gtk3-dark` with Papirus-Dark icons.
 
 ## Local packages
 
@@ -93,7 +95,7 @@ Arion uses Docker to run `traefik`, `portainer`, `autokube`, `streaming`, and `g
 
 `streaming` is declared but no longer starts at boot: its generated unit is detached with `systemd.services.<streaming unit>.wantedBy = lib.mkForce [ ]`. Start it on demand with `systemctl start arion-streaming`.
 
-Prometheus and node-exporter run directly on the host. Grafana reaches Prometheus through `host.docker.internal`. Media data is stored under `/mnt/myexternaldisk/streaming`; application configuration is stored under `/home/marcelo/docker/streaming` or Docker volumes.
+Prometheus, node-exporter, and the libvirt exporter run directly on the host. Grafana reaches Prometheus through `host.docker.internal`; its datasource (with a pinned UID) and the libvirt dashboard are provisioned from `nixos/modules/arion/grafana/provisioning/` with UI edits disabled. Media data is stored under `/mnt/myexternaldisk/streaming`; application configuration is stored under `/home/marcelo/docker/streaming` or Docker volumes.
 
 Most container images use upstream mutable tags, so rebuilding NixOS does not fully pin their runtime contents.
 
