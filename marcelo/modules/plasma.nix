@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   osConfig,
   pkgs,
@@ -8,6 +9,10 @@
 let
   rootDisk = "disk/${lib.removePrefix "/dev/disk/by-uuid/" osConfig.fileSystems."/".device}";
   rootDiskFace = "starscream.ksysguard.piechart-small";
+
+  # home-manager uses useGlobalPkgs, so there's no per-user overlay to hook
+  # the flake input into; apply its overlay function locally instead.
+  appgrid = (inputs.appgrid.overlays.default pkgs pkgs).appgrid;
 
   # Upstream's dark look-and-feel names a cursor theme that does not exist (the
   # icon pack ships Qogir-Dark), and both pick Kvantum, whose dark-variant
@@ -40,7 +45,7 @@ in
 
     workspace = {
       clickItemTo = "select";
-      wallpaper = "/home/marcelo/Pictures/Wallpapers/dodgechallenger.jpg";
+      wallpaper = "/home/marcelo/Pictures/Wallpapers/nixos-blue.png";
       wallpaperBackground.blur = true;
     };
 
@@ -145,10 +150,46 @@ in
       timeout = 15;
     };
 
+    kwin.virtualDesktops = {
+      number = 3;
+      rows = 1;
+    };
+
     panels = [
       {
-        location = "bottom";
+        location = "top";
+        height = 38;
+        floating = false;
+        hiding = "none";
+        opacity = "adaptive";
         widgets = [
+          {
+            # kara pager, "Pills" style (type 0); its kcfg group is lowercase "general".
+            name = "org.dhruv8sh.kara";
+            config.general.type = 0;
+          }
+          "org.kde.plasma.panelspacer"
+          {
+            digitalClock = {
+              date = {
+                enable = true;
+                format.custom = "MMM d";
+                position = "besideTime";
+              };
+              time = {
+                format = "12h";
+                showSeconds = "never";
+              };
+              # Matches the weather widget's 15 px text: the clock converts
+              # points with the screen's ~88 DPI (3840 px / 1.75 over 632 mm).
+              # weight defaults to Qt 5's 50, which Qt 6 renders as thin.
+              font = {
+                family = "SF Pro Text";
+                size = 12;
+                weight = 400;
+              };
+            };
+          }
           {
             name = "weather.widget.plus";
             config = {
@@ -172,42 +213,6 @@ in
             };
           }
           "org.kde.plasma.panelspacer"
-          {
-            name = "AndromedaLauncher";
-            config.General = {
-              enableGlow = true;
-              floating = true;
-              glowColor = 1;
-              launcherPosition = 1;
-              useSystemFontSettings = true;
-            };
-          }
-          {
-            iconTasks = {
-              launchers = [
-                "applications:org.kde.dolphin.desktop"
-                "applications:org.kde.kate.desktop"
-                "applications:virt-manager.desktop"
-                "applications:chromium-browser.desktop"
-                "applications:firefox.desktop"
-                "applications:com.anthropic.Claude.desktop"
-                "applications:code.desktop"
-                "applications:dev.zed.Zed.desktop"
-                "applications:lens-desktop.desktop"
-                "applications:kitty.desktop"
-                "applications:org.telegram.desktop.desktop"
-                "applications:spotify.desktop"
-                "applications:steam.desktop"
-              ];
-              behavior.showTasks = {
-                onlyInCurrentDesktop = false;
-                onlyInCurrentActivity = false;
-              };
-              settings.General.fill = false;
-            };
-          }
-          "org.kde.plasma.panelspacer"
-          "org.kde.plasma.marginsseparator"
           {
             name = "org.kde.plasma.resources-monitor";
             config.General.graphs = builtins.toJSON [
@@ -335,7 +340,75 @@ in
               ];
             };
           }
-          "org.kde.plasma.digitalclock"
+          {
+            name = "org.kde.plasma.shutdownorswitch";
+            config.General = {
+              showLockScreen = true;
+              showLogOut = true;
+              showSuspend = true;
+              showRestart = true;
+              showShutdown = true;
+              showHibernate = false;
+              showSuspendThenHibernate = false;
+              showNewSession = false;
+              showUsers = false;
+              showName = false;
+            };
+          }
+        ];
+      }
+      {
+        location = "bottom";
+        alignment = "center";
+        lengthMode = "fit";
+        floating = true;
+        hiding = "dodgewindows";
+        opacity = "translucent";
+        height = 56;
+        widgets = [
+          # Centered AppGrid launcher. Both AppGrid plasmoids declare
+          # X-Plasma-Provides: org.kde.plasma.launchermenu, so KWin's
+          # Meta-only modifier shortcut opens this without extra config.
+          "dev.xarbit.appgrid"
+          "org.kde.plasma.marginsseparator"
+          {
+            iconTasks = {
+              launchers = [
+                "applications:org.kde.dolphin.desktop"
+                "applications:org.kde.kate.desktop"
+                "applications:virt-manager.desktop"
+                "applications:chromium-browser.desktop"
+                "applications:firefox.desktop"
+                "applications:com.anthropic.Claude.desktop"
+                "applications:code.desktop"
+                "applications:dev.zed.Zed.desktop"
+                "applications:lens-desktop.desktop"
+                "applications:kitty.desktop"
+                "applications:org.telegram.desktop.desktop"
+                "applications:spotify.desktop"
+                "applications:steam.desktop"
+              ];
+              appearance = {
+                showTooltips = true;
+                highlightWindows = true;
+                indicateAudioStreams = true;
+                iconSpacing = "medium";
+                fill = false;
+              };
+              behavior = {
+                grouping = {
+                  method = "byProgramName";
+                  clickAction = "showPresentWindowsEffect";
+                };
+                sortingMethod = "manually";
+                minimizeActiveTaskOnClick = true;
+                showTasks = {
+                  onlyInCurrentDesktop = false;
+                  onlyInCurrentActivity = false;
+                };
+              };
+            };
+          }
         ];
       }
     ];
@@ -357,6 +430,9 @@ in
       "kdeglobals"."General"."XftAntialias" = true;
       "kdeglobals"."General"."XftHintStyle" = "hintfull";
       "kdeglobals"."General"."XftSubPixel" = "rgb";
+      # Top-left screen edge (ElectricTopLeft = 7) opens Overview, like GNOME's
+      # Activities corner; this is KWin's default, pinned here.
+      "kwinrc"."Effect-overview"."BorderActivate" = 7;
       "kwinrc"."TabBox"."ActivitiesMode" = 0;
       "kwinrc"."TabBox"."DesktopMode" = 0;
       "kwinrc"."Xwayland"."Scale" = 1.75;
@@ -396,8 +472,9 @@ in
     qogir-kde
     pkgs.qogir-icon-theme
     pkgs.qogir-theme
-    (pkgs.callPackage ../../pkgs/plasmoids/andromeda-launcher.nix { })
+    appgrid
     (pkgs.callPackage ../../pkgs/plasmoids/resources-monitor.nix { })
+    (pkgs.callPackage ../../pkgs/plasmoids/shutdown-or-switch.nix { })
     (pkgs.callPackage ../../pkgs/plasmoids/weather-widget-plus.nix { })
     (pkgs.callPackage ../../pkgs/sensorfaces/piechart-small.nix { })
   ];

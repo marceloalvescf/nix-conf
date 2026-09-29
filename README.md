@@ -41,7 +41,7 @@ This repository is machine-specific. It can be used as a reference, but it is no
 
 The system runs Plasma 6 on Wayland; X11 and SDDM are disabled. greetd starts `tuigreet --cmd startplasma-wayland` in `nixos/modules/plasma.nix`, and `pam_kwallet5` runs with `force_run` so the VT login still unlocks KWallet.
 
-User settings are declared with Plasma Manager in `marcelo/modules/plasma.nix`: the Qogir global themes, switched automatically between light and dark at Night Light's sunrise and sunset (colours, Qogir icons and cursors, Plasma theme, window decoration), Apple SF fonts, input devices, night light, power management, the screen locker, and the bottom panel. The panel carries the third-party plasmoids from `pkgs/plasmoids/` plus a System Monitor pie chart for root filesystem usage, whose sensor ID is derived from `fileSystems."/"`.
+User settings are declared with Plasma Manager in `marcelo/modules/plasma.nix`: the Qogir global themes, switched automatically between light and dark at Night Light's sunrise and sunset (colours, Qogir icons and cursors, Plasma theme, window decoration), Apple SF fonts, input devices, night light, power management, the screen locker, 3 virtual desktops, and a GNOME-inspired layout. A thin top bar holds the kara pill workspace indicator on the left, the clock (with date and Weather Widget Plus) in the centre, and the Resources Monitor, a System Monitor pie chart for root filesystem usage (sensor ID derived from `fileSystems."/"`), the system tray, and a Shutdown or Switch power menu on the right. A floating bottom dock that dodges windows holds the AppGrid launcher (from the `appgrid` flake input, opened by Meta or by clicking it) and the pinned task manager. The top-left screen corner opens Overview, like GNOME's Activities hot corner.
 
 GTK settings are left to Plasma's GTK sync, which follows the active global theme; only the GTK theme name (`Qogir-Light`, whose dark variant is `Qogir-Dark`) is set, once, by a Plasma Manager startup script.
 
@@ -60,7 +60,7 @@ Restart the shell with `systemctl --user restart plasma-plasmashell` when a new 
 
 - `attack-shark-x11` — Electron configuration app for the Attack Shark X11 mouse, built from the upstream `v1.4.3` tag with a regenerated `package-lock.json`
 - `lens-desktop` — wraps the upstream AppImage
-- `plasmoids/` — third-party Plasma widgets: Andromeda Launcher, Resources Monitor, and Weather Widget Plus
+- `plasmoids/` — third-party Plasma widgets: Shutdown or Switch, Resources Monitor, and Weather Widget Plus
 - `sensorfaces/piechart-small.nix` — copy of the stock Plasma Pie Chart sensor face with a 2pt smaller center value, rebuilt from the installed `libksysguard`
 
 `attack-shark-x11` and `lens-desktop` are imported in `marcelo/home.nix`; the plasmoids and the sensor face are installed from `marcelo/modules/plasma.nix`. Claude Desktop is no longer packaged here: it comes from the `llm-agents` flake input, and `marcelo/modules/packages.nix` ships the desktop entry that carries the window-matching, GPU, and icon fixes.

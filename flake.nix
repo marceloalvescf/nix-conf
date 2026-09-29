@@ -40,6 +40,11 @@
       url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    appgrid = {
+      url = "github:xarbit/plasma6-applet-appgrid";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
