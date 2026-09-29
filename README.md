@@ -41,7 +41,9 @@ This repository is machine-specific. It can be used as a reference, but it is no
 
 The system runs Plasma 6 on Wayland; X11 and SDDM are disabled. greetd starts `tuigreet --cmd startplasma-wayland` in `nixos/modules/plasma.nix`, and `pam_kwallet5` runs with `force_run` so the VT login still unlocks KWallet.
 
-User settings are declared with Plasma Manager in `marcelo/modules/plasma.nix`: Breeze Dark with Papirus-Dark icons, Noto Sans/Noto Sans Mono fonts, input devices, night light, power management, the screen locker, and the bottom panel. The panel carries the third-party plasmoids from `pkgs/plasmoids/` plus a System Monitor pie chart for root filesystem usage, whose sensor ID is derived from `fileSystems."/"`.
+User settings are declared with Plasma Manager in `marcelo/modules/plasma.nix`: the Qogir global themes, switched automatically between light and dark at Night Light's sunrise and sunset (colours, Qogir icons and cursors, Plasma theme, window decoration), Apple SF fonts, input devices, night light, power management, the screen locker, and the bottom panel. The panel carries the third-party plasmoids from `pkgs/plasmoids/` plus a System Monitor pie chart for root filesystem usage, whose sensor ID is derived from `fileSystems."/"`.
+
+GTK settings are left to Plasma's GTK sync, which follows the active global theme; only the GTK theme name (`Qogir-Light`, whose dark variant is `Qogir-Dark`) is set, once, by a Plasma Manager startup script.
 
 Panels, themes, and the wallpaper are applied by the Plasma Manager autostart script at login. To apply them after a switch without logging out:
 

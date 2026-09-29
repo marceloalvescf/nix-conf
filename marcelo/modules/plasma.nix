@@ -8,6 +8,30 @@
 let
   rootDisk = "disk/${lib.removePrefix "/dev/disk/by-uuid/" osConfig.fileSystems."/".device}";
   rootDiskFace = "starscream.ksysguard.piechart-small";
+
+  # Upstream's dark look-and-feel names a cursor theme that does not exist (the
+  # icon pack ships Qogir-Dark), and both pick Kvantum, whose dark-variant
+  # lookup does not match Qogir's folder names. Breeze follows the colour scheme.
+  # The dialog and tooltip SVGs also carry a leftover Inkscape <style> with
+  # light Breeze colours after the current-color-scheme block Plasma recolours,
+  # so it wins and paints popups and tooltips light under Qogir-dark.
+  qogir-kde = pkgs.qogir-kde.overrideAttrs (old: {
+    postInstall = (old.postInstall or "") + ''
+      lnf=$out/share/plasma/look-and-feel/com.github.vinceliuice.Qogir
+      substituteInPlace $lnf-dark/contents/defaults \
+        --replace-fail cursorTheme=Qogir-dark cursorTheme=Qogir-Dark \
+        --replace-fail widgetStyle=kvantum-dark widgetStyle=Breeze
+      substituteInPlace $lnf-light/contents/defaults \
+        --replace-fail widgetStyle=kvantum widgetStyle=Breeze
+
+      find $out/share/plasma/desktoptheme -name '*.svg' -exec \
+        sed -i -E -z 's#<style[^>]*id="style(8|22)"[^>]*>[^<]*ColorScheme-[^<]*</style>##g' {} +
+      if grep -rlzE 'id="style(8|22)"[^>]*>[^<]*ColorScheme-' $out/share/plasma/desktoptheme; then
+        echo "stray Qogir colour-scheme styles left" >&2
+        exit 1
+      fi
+    '';
+  });
 in
 
 {
@@ -16,9 +40,6 @@ in
 
     workspace = {
       clickItemTo = "select";
-      cursor.theme = "WhiteSur-cursors";
-      iconTheme = "Papirus-Dark";
-      lookAndFeel = "org.kde.breezedark.desktop";
       wallpaper = "/home/marcelo/Pictures/Wallpapers/dodgechallenger.jpg";
       wallpaperBackground.blur = true;
     };
@@ -295,7 +316,7 @@ in
           }
           {
             systemTray.items = {
-              # devicenotifier and brightness intentionally absent: "never show".
+              # devicenotifier intentionally absent: "never show".
               extra = [
                 "org.kde.plasma.cameraindicator"
                 "org.kde.plasma.clipboard"
@@ -310,6 +331,7 @@ in
                 "org.kde.plasma.networkmanagement"
                 "org.kde.plasma.volume"
                 "org.kde.plasma.weather"
+                "org.kde.plasma.brightness"
               ];
             };
           }
@@ -325,6 +347,12 @@ in
     # stop KWin from saving. Only the XWayland half below is declarative.
     configFile = {
       "baloofilerc"."Basic Settings"."Indexing-Enabled" = false;
+      # Plasma swaps these at Night Light's sunrise/sunset. Each switch applies
+      # the whole package (colours, icons, cursor, Plasma theme, decoration),
+      # so none of those parts is set on its own.
+      "kdeglobals"."KDE"."AutomaticLookAndFeel" = true;
+      "kdeglobals"."KDE"."DefaultDarkLookAndFeel" = "com.github.vinceliuice.Qogir-dark";
+      "kdeglobals"."KDE"."DefaultLightLookAndFeel" = "com.github.vinceliuice.Qogir-light";
       "kdeglobals"."General"."BrowserApplication" = "firefox.desktop";
       "kdeglobals"."General"."XftAntialias" = true;
       "kdeglobals"."General"."XftHintStyle" = "hintfull";
@@ -336,6 +364,14 @@ in
       "kxkbrc"."Layout"."ResetOldOptions" = true;
       "kxkbrc"."Layout"."Use" = true;
     };
+
+    # Plasma's GTK sync owns the GTK settings files and rewrites icons, cursor,
+    # font, button layout and the dark preference from the active global theme;
+    # only the theme name is set here. Qogir-Light's dark variant is Qogir-Dark.
+    startup.startupScript."gtk_theme".text = ''
+      ${pkgs.dbus}/bin/dbus-send --session --print-reply --type=method_call \
+        --dest=org.kde.GtkConfig /GtkConfig org.kde.GtkConfig.setGtkTheme string:Qogir-Light
+    '';
   };
 
   # BrowserApplication above only covers KDE apps and kde-open; xdg-open and
@@ -357,6 +393,9 @@ in
   };
 
   home.packages = [
+    qogir-kde
+    pkgs.qogir-icon-theme
+    pkgs.qogir-theme
     (pkgs.callPackage ../../pkgs/plasmoids/andromeda-launcher.nix { })
     (pkgs.callPackage ../../pkgs/plasmoids/resources-monitor.nix { })
     (pkgs.callPackage ../../pkgs/plasmoids/weather-widget-plus.nix { })

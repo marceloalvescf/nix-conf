@@ -26,7 +26,6 @@ in
     ./modules/chromium.nix
     ./modules/fish.nix
     ./modules/git.nix
-    ./modules/gtk.nix
     ./modules/kitty.nix
     ./modules/kubernetes.nix
     ./modules/neovim.nix
