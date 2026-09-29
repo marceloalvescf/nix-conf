@@ -86,6 +86,7 @@
         };
       };
 
+      ui_font_family = "SF Pro";
       ui_font_size = 16;
       buffer_font_size = 13;
       buffer_font_family = "JetBrainsMono Nerd Font Mono";
