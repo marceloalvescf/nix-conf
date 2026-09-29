@@ -11,7 +11,7 @@
     };
 
     font = {
-      name = "Noto Sans";
+      name = "SF Pro Text";
       size = 10;
     };
 
