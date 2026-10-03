@@ -17,12 +17,7 @@
       enable = true;
       dbus.enable = true;
       qemu = {
-        package = (
-          pkgs.qemu_kvm.override {
-            enableDocs = false;
-            cephSupport = false;
-          }
-        );
+        package = pkgs.qemu_kvm;
         runAsRoot = true;
         swtpm.enable = true;
       };

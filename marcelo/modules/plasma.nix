@@ -185,7 +185,7 @@ in
               # weight defaults to Qt 5's 50, which Qt 6 renders as thin.
               font = {
                 family = "SF Pro Text";
-                size = 12;
+                size = 11;
                 weight = 400;
               };
             };
@@ -193,7 +193,7 @@ in
           {
             name = "weather.widget.plus";
             config = {
-              Appearance.widgetFontSize = 15;
+              Appearance.widgetFontSize = 13;
               Location = {
                 firstRun = false;
                 places = builtins.toJSON [

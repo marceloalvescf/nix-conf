@@ -58,12 +58,11 @@ Restart the shell with `systemctl --user restart plasma-plasmashell` when a new 
 
 `pkgs/` holds derivations for applications that upstream does not provide in the desired form:
 
-- `attack-shark-x11` — Electron configuration app for the Attack Shark X11 mouse, built from the upstream `v1.4.3` tag with a regenerated `package-lock.json`
 - `lens-desktop` — wraps the upstream AppImage
 - `plasmoids/` — third-party Plasma widgets: Shutdown or Switch, Resources Monitor, and Weather Widget Plus
 - `sensorfaces/piechart-small.nix` — copy of the stock Plasma Pie Chart sensor face with a 2pt smaller center value, rebuilt from the installed `libksysguard`
 
-`attack-shark-x11` and `lens-desktop` are imported in `marcelo/home.nix`; the plasmoids and the sensor face are installed from `marcelo/modules/plasma.nix`. Claude Desktop is no longer packaged here: it comes from the `llm-agents` flake input, and `marcelo/modules/packages.nix` ships the desktop entry that carries the window-matching, GPU, and icon fixes.
+`lens-desktop` is imported in `marcelo/home.nix`; the plasmoids and the sensor face are installed from `marcelo/modules/plasma.nix`. Claude Desktop is no longer packaged here: it comes from the `llm-agents` flake input, and `marcelo/modules/packages.nix` ships the desktop entry that carries the window-matching, GPU, and icon fixes.
 
 ## Common operations
 
@@ -123,7 +122,5 @@ The age key is expected at `/home/marcelo/.config/sops/age/keys.txt`. Never comm
 
 - [Secure Boot setup](docs/secure-boot-setup.md)
 - [Ryzen 5700X and X570 BIOS tuning](docs/bios-tuning-ryzen-5700x-x570.md)
-
-The Attack Shark X11 udev rules in `nixos/modules/hardware.nix` are shipped through `services.udev.packages` with a `60-` filename prefix, not through `services.udev.extraRules`. The latter writes to `99-local.rules`, but systemd turns the `uaccess` tag into an ACL from `73-seat-late.rules`, so a tag set at 99 is never acted on and the device stays root-only.
 
 `system.stateVersion` and `home.stateVersion` preserve compatibility with existing state; they are not package-version selectors and should not be changed during routine upgrades.

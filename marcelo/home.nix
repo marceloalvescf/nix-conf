@@ -7,7 +7,6 @@
 let
   # Import packages from flake root
   lens = import (inputs.self + "/pkgs/lens-desktop/pkg.nix") { inherit pkgs; };
-  attack-shark-x11 = pkgs.callPackage (inputs.self + "/pkgs/attack-shark-x11/pkg.nix") { };
 in
 {
   home.username = "marcelo";
@@ -41,7 +40,6 @@ in
   ];
 
   home.packages = [
-    attack-shark-x11
     lens
   ];
 
