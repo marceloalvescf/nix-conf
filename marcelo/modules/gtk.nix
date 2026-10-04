@@ -1,32 +1,21 @@
 { pkgs, ... }:
 
 {
+  # The theme, icon and cursor variants are owned by gnome-theme-follower, so
+  # gtk.theme and friends must stay unset: they also write dconf on every switch.
+  home.packages = with pkgs; [
+    qogir-icon-theme
+    qogir-theme
+  ];
+
   gtk = {
     enable = true;
-    colorScheme = "dark";
-
-    cursorTheme = {
-      package = pkgs.whitesur-cursors;
-      name = "WhiteSur-cursors";
-    };
-
     font = {
-      name = "Adwaita Sans";
+      name = "SF Pro Text";
       size = 10;
     };
 
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-
-    theme = {
-      name = "adw-gtk3-dark";
-      package = pkgs.adw-gtk3;
-    };
-
     gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
       gtk-decoration-layout = "icon:minimize,maximize,close";
       gtk-enable-animations = true;
     };
@@ -34,7 +23,6 @@
     gtk4 = {
       theme = null;
       extraConfig = {
-        gtk-application-prefer-dark-theme = true;
         gtk-decoration-layout = "icon:minimize,maximize,close";
         gtk-enable-animations = true;
       };

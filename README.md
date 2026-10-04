@@ -43,13 +43,12 @@ The system runs GNOME on Wayland; X11 is disabled and GDM is the display manager
 
 The user side lives in `marcelo/modules/gnome.nix`, which installs the shell extensions and GNOME utilities and imports `marcelo/modules/dconf.nix`. That file declares the desktop state itself — enabled extensions, dock favorites, fonts, theme, input sources, keybindings, night light, Nautilus defaults, and the Ptyxis profile. Settings changed through the GNOME UI are overwritten on the next switch unless they are also written there.
 
-Ptyxis is the terminal and starts Fish through a custom command. Fonts are Adwaita Sans/Adwaita Mono and JetBrainsMono Nerd Font; the GTK theme is `adw-gtk3-dark` with Papirus-Dark icons.
+Ptyxis is the terminal and starts Fish through a custom command. Fonts are Apple SF Pro/SF Mono/New York and JetBrainsMono Nerd Font. The Night Theme Switcher extension flips the GNOME color scheme between light and dark at sunrise and sunset, and the `gnome-theme-follower` user service (`marcelo/modules/theme-follower.nix`) matches the Qogir GTK, icon, and cursor variants and the Ptyxis palette (Catppuccin Mocha or Latte) to it. Those settings are therefore left out of dconf and the `gtk` module on purpose.
 
 ## Local packages
 
 `pkgs/` holds derivations for applications that upstream does not provide in the desired form:
 
-- `attack-shark-x11` — Electron configuration app for the Attack Shark X11 mouse, built from the upstream `v1.4.3` tag with a regenerated `package-lock.json`
 - `lens-desktop` — wraps the upstream AppImage
 - `spotify-xwayland` — forces the XWayland launch path
 
@@ -113,7 +112,5 @@ The age key is expected at `/home/marcelo/.config/sops/age/keys.txt`. Never comm
 
 - [Secure Boot setup](docs/secure-boot-setup.md)
 - [Ryzen 5700X and X570 BIOS tuning](docs/bios-tuning-ryzen-5700x-x570.md)
-
-The Attack Shark X11 udev rules in `nixos/modules/hardware.nix` are shipped through `services.udev.packages` with a `60-` filename prefix, not through `services.udev.extraRules`. The latter writes to `99-local.rules`, but systemd turns the `uaccess` tag into an ACL from `73-seat-late.rules`, so a tag set at 99 is never acted on and the device stays root-only.
 
 `system.stateVersion` and `home.stateVersion` preserve compatibility with existing state; they are not package-version selectors and should not be changed during routine upgrades.

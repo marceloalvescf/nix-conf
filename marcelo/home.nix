@@ -8,7 +8,6 @@ let
   # Import packages from flake root
   lens = import (inputs.self + "/pkgs/lens-desktop/pkg.nix") { inherit pkgs; };
   spotify-xwayland = import (inputs.self + "/pkgs/spotify-xwayland/pkg.nix") { inherit pkgs; };
-  attack-shark-x11 = pkgs.callPackage (inputs.self + "/pkgs/attack-shark-x11/pkg.nix") { };
 in
 {
   home.username = "marcelo";
@@ -35,6 +34,7 @@ in
     ./modules/obs-studio.nix
     ./modules/packages.nix
     ./modules/ptyxis.nix
+    ./modules/theme-follower.nix
     ./modules/secrets.nix
     ./modules/ssh.nix
     ./modules/starship.nix
@@ -44,7 +44,6 @@ in
   ];
 
   home.packages = [
-    attack-shark-x11
     lens
     spotify-xwayland
   ];
