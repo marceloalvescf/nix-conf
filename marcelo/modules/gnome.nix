@@ -13,6 +13,8 @@
     gnome-extension-manager
     gnome-shell-extensions
     gnome-tweaks
+    gradia
+    kooha
     nautilus
     resources
   ];

@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 with lib.hm.gvariant;
 
@@ -86,6 +86,39 @@ with lib.hm.gvariant;
     "org/gnome/desktop/wm/keybindings" = {
       move-to-workspace-up = [ "<Super><Shift>Page_Up" ];
       move-to-workspace-down = [ "<Super><Shift>Page_Down" ];
+    };
+
+    # Spectacle-style capture: Print/Shift+Print go to Gradia, so the native
+    # screenshot UI moves to Super+Print and its full-screen binding is freed.
+    "org/gnome/shell/keybindings" = {
+      screenshot = [ ];
+      show-screenshot-ui = [ "<Super>Print" ];
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gradia-region/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gradia-full/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/kooha/"
+      ];
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gradia-region" = {
+      name = "Screenshot region (Gradia)";
+      binding = "Print";
+      command = "${lib.getExe pkgs.gradia} --screenshot=INTERACTIVE";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gradia-full" = {
+      name = "Screenshot full screen (Gradia)";
+      binding = "<Shift>Print";
+      command = "${lib.getExe pkgs.gradia} --screenshot=FULL";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/kooha" = {
+      name = "Screen recorder (Kooha)";
+      binding = "<Super><Shift>r";
+      command = lib.getExe pkgs.kooha;
     };
 
     "org/gnome/desktop/wm/preferences" = {
