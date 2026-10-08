@@ -30,6 +30,7 @@ in
     ./modules/gnome.nix
     ./modules/gtk.nix
     ./modules/kubernetes.nix
+    ./modules/mimeapps.nix
     ./modules/neovim.nix
     ./modules/obs-studio.nix
     ./modules/packages.nix
