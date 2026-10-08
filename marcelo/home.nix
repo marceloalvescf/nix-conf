@@ -27,6 +27,7 @@ in
     ./modules/git.nix
     ./modules/kitty.nix
     ./modules/kubernetes.nix
+    ./modules/mimeapps.nix
     ./modules/neovim.nix
     ./modules/obs-studio.nix
     ./modules/packages.nix

@@ -450,24 +450,6 @@ in
     '';
   };
 
-  # BrowserApplication above only covers KDE apps and kde-open; xdg-open and
-  # non-KDE callers resolve through mimeapps.list. Home Manager writes that file
-  # as a store symlink, so it becomes read-only and applications can no longer
-  # register themselves — every handler has to be declared here, including the
-  # claude scheme that Claude Desktop used to add on its own.
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "application/xhtml+xml" = "firefox.desktop";
-      "text/html" = "firefox.desktop";
-      "x-scheme-handler/about" = "firefox.desktop";
-      "x-scheme-handler/claude" = "com.anthropic.Claude.desktop";
-      "x-scheme-handler/http" = "firefox.desktop";
-      "x-scheme-handler/https" = "firefox.desktop";
-      "x-scheme-handler/unknown" = "firefox.desktop";
-    };
-  };
-
   home.packages = [
     qogir-kde
     pkgs.qogir-icon-theme
