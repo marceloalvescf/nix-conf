@@ -163,11 +163,7 @@ in
         hiding = "none";
         opacity = "adaptive";
         widgets = [
-          {
-            # kara pager, "Pills" style (type 0); its kcfg group is lowercase "general".
-            name = "org.dhruv8sh.kara";
-            config.general.type = 0;
-          }
+          "com.github.dualitykyle.desktopindicator"
           "org.kde.plasma.panelspacer"
           {
             digitalClock = {
@@ -455,6 +451,7 @@ in
     pkgs.qogir-icon-theme
     pkgs.qogir-theme
     appgrid
+    (pkgs.callPackage ../../pkgs/plasmoids/minimal-desktop-indicator.nix { })
     (pkgs.callPackage ../../pkgs/plasmoids/resources-monitor.nix { })
     (pkgs.callPackage ../../pkgs/plasmoids/shutdown-or-switch.nix { })
     (pkgs.callPackage ../../pkgs/plasmoids/weather-widget-plus.nix { })
