@@ -7,15 +7,7 @@
 }:
 
 let
-  # Nixpkgs removed `services.journald.console`; arion's container-systemd module
-  # still sets it, which breaks arion's test suite and container evaluation.
-  arion = inputs.arion.packages.${pkgs.stdenv.hostPlatform.system}.arion.overrideAttrs (old: {
-    postPatch = (old.postPatch or "") + ''
-      substituteInPlace src/nix/modules/nixos/container-systemd.nix \
-        --replace-fail 'services.journald.console = "/dev/console";' \
-          'services.journald.settings.Journal = { ForwardToConsole = true; TTYPath = "/dev/console"; };'
-    '';
-  });
+  arion = inputs.arion.packages.${pkgs.stdenv.hostPlatform.system}.arion;
 
   # Create a derivation containing Traefik config files.
   # This ensures the store path is properly tracked and won't be garbage collected.

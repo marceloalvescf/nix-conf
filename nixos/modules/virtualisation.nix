@@ -5,10 +5,16 @@
       enable = true;
       enableOnBoot = true;
       autoPrune.enable = true;
+      logDriver = "json-file";
       daemon = {
         settings = {
           "experimental" = true;
           "metrics-addr" = "127.0.0.1:9323";
+          # Applies only to containers created after the daemon restarts.
+          "log-opts" = {
+            "max-size" = "10m";
+            "max-file" = "3";
+          };
         };
       };
     };

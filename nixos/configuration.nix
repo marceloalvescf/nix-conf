@@ -61,11 +61,18 @@
     ./modules/virtualisation.nix
   ];
 
-  # Enable flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    # Enable flakes
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    # Binary cache for the llm-agents flake input
+    extra-substituters = [ "https://cache.numtide.com" ];
+    extra-trusted-public-keys = [
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+    ];
+  };
 
   # Nixpkgs related settings
   nixpkgs = {

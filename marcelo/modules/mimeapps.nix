@@ -15,6 +15,7 @@ in
       "x-scheme-handler/https" = browser;
       "x-scheme-handler/about" = browser;
       "x-scheme-handler/unknown" = browser;
+      "x-scheme-handler/claude" = "com.anthropic.Claude.desktop";
       # Registered at runtime by Claude Code; kept here because home-manager now owns the file.
       "x-scheme-handler/claude-cli" = "claude-code-url-handler.desktop";
     };
