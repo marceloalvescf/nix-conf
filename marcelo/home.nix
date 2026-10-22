@@ -30,6 +30,7 @@ in
     ./modules/mimeapps.nix
     ./modules/neovim.nix
     ./modules/obs-studio.nix
+    ./modules/openclaw.nix
     ./modules/packages.nix
     ./modules/plasma.nix
     ./modules/secrets.nix

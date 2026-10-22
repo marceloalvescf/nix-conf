@@ -31,6 +31,11 @@
         ];
 
         networks = [ "proxy" ];
+
+        # Reach services running on the host, such as the OpenClaw gateway.
+        extra_hosts = [
+          "host.docker.internal:host-gateway"
+        ];
       };
     };
   };
