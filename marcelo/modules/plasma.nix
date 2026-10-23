@@ -398,6 +398,9 @@ in
                 };
                 sortingMethod = "manually";
                 minimizeActiveTaskOnClick = true;
+                # Badges and urgent windows must not pull the dodging dock
+                # up over the active window.
+                unhideOnAttentionNeeded = false;
                 showTasks = {
                   onlyInCurrentDesktop = false;
                   onlyInCurrentActivity = false;
