@@ -17,6 +17,14 @@ http:
       middlewares:
         - default-ipallowlist
       tls: {}
+    openclaw:
+      rule: Host(`openclaw-sc.alvesm.dev`)
+      entryPoints:
+        - websecure
+      service: openclaw
+      middlewares:
+        - default-ipallowlist
+      tls: {}
   services:
     cockpit:
       loadBalancer:
@@ -25,6 +33,11 @@ http:
         serversTransport: insecure-backend
         servers:
           - url: https://192.168.100.151:9090
+    openclaw:
+      loadBalancer:
+        # The gateway runs as a user service on the host (marcelo/modules/openclaw.nix).
+        servers:
+          - url: http://host.docker.internal:18789
   middlewares:
     default-ipallowlist:
       ipAllowList:

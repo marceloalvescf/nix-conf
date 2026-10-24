@@ -114,6 +114,5 @@ in
     ++ [
       # AI related packages from llm-agents overlay
       claude-desktop
-      llmAgents.hermes-agent
     ];
 }

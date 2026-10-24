@@ -33,6 +33,7 @@ in
     ./modules/mimeapps.nix
     ./modules/neovim.nix
     ./modules/obs-studio.nix
+    ./modules/openclaw.nix
     ./modules/packages.nix
     ./modules/ptyxis.nix
     ./modules/theme-follower.nix
