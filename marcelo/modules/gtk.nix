@@ -5,7 +5,7 @@
   # gtk.theme and friends must stay unset: they also write dconf on every switch.
   home.packages = with pkgs; [
     qogir-icon-theme
-    qogir-theme
+    (qogir-theme.override { tweaks = [ "round" ]; })
   ];
 
   gtk = {

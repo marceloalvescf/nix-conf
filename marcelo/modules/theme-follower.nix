@@ -9,15 +9,15 @@ let
 
   apply = pkgs.writeShellScript "gnome-theme-apply" ''
     if [ "$(${dconf} read ${interface}/color-scheme)" = "'prefer-dark'" ]; then
-      gtk=Qogir-Dark icons=Qogir-Dark cursor=Qogir-Dark palette="Catppuccin Mocha"
+      gtk=Qogir-Round-Dark icons=Qogir-Dark cursor=Qogir-Dark
     else
-      gtk=Qogir-Light icons=Qogir-Light cursor=Qogir palette="Catppuccin Latte"
+      gtk=Qogir-Round-Light icons=Qogir-Light cursor=Qogir
     fi
 
     ${dconf} write ${interface}/gtk-theme "'$gtk'"
     ${dconf} write ${interface}/icon-theme "'$icons'"
     ${dconf} write ${interface}/cursor-theme "'$cursor'"
-    ${dconf} write ${ptyxisProfile}/palette "'$palette'"
+    ${dconf} write ${ptyxisProfile}/palette "'Ayu'"
   '';
 
   follow = pkgs.writeShellScript "gnome-theme-follow" ''
@@ -34,7 +34,7 @@ in
 {
   systemd.user.services.gnome-theme-follower = {
     Unit = {
-      Description = "Follow the GNOME color scheme with Qogir and Catppuccin variants";
+      Description = "Follow the GNOME color scheme with Qogir variants and Ayu";
       After = [ "graphical-session.target" ];
       PartOf = [ "graphical-session.target" ];
     };

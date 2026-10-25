@@ -15,6 +15,7 @@ with lib.hm.gvariant;
         "dash-to-dock@micxgx.gmail.com"
         "monitor@astraext.github.io"
         "nightthemeswitcher@romainvigier.fr"
+        "rounded-window-corners@fxgn"
         "simple-weather@romanlefler.com"
         "user-theme@gnome-shell-extensions.gcampax.github.com"
       ];
@@ -33,6 +34,12 @@ with lib.hm.gvariant;
         "spotify.desktop"
         "steam.desktop"
       ];
+    };
+
+    "org/gnome/desktop/background" = {
+      picture-uri = "file://${pkgs.gnome-backgrounds}/share/backgrounds/gnome/map-l.svg";
+      picture-uri-dark = "file://${pkgs.gnome-backgrounds}/share/backgrounds/gnome/map-d.svg";
+      picture-options = "zoom";
     };
 
     "org/gnome/desktop/interface" = {
@@ -143,6 +150,8 @@ with lib.hm.gvariant;
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = true;
       night-light-schedule-automatic = true;
+      night-light-schedule-from = 18.0;
+      night-light-schedule-to = 6.0;
       night-light-last-coordinates = lib.hm.gvariant.mkTuple [
         "-19.60"
         "-43.90"

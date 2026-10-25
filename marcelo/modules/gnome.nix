@@ -9,6 +9,7 @@
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.dash-to-dock
     gnomeExtensions.night-theme-switcher
+    gnomeExtensions.rounded-window-corners-reborn
     gnomeExtensions.simpleweather
     gnome-extension-manager
     gnome-shell-extensions

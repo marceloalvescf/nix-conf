@@ -12,8 +12,6 @@
         with pkgs.vscode-extensions;
         [
           anthropic.claude-code
-          catppuccin.catppuccin-vsc
-          catppuccin.catppuccin-vsc-icons
           eamodio.gitlens
           hashicorp.terraform
           jnoortheen.nix-ide
@@ -23,6 +21,7 @@
           ms-python.vscode-pylance
           ms-vscode-remote.remote-ssh
           redhat.vscode-yaml
+          teabyii.ayu
         ]
         ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
@@ -38,8 +37,9 @@
         "terminal.integrated.fontFamily" = "JetBrainsMono Nerd Font Mono";
 
         "window.autoDetectColorScheme" = true;
-        "workbench.preferredLightColorTheme" = "Catppuccin Latte";
-        "workbench.preferredDarkColorTheme" = "Catppuccin Mocha";
+        "workbench.preferredLightColorTheme" = "Ayu Light Bordered";
+        "workbench.preferredDarkColorTheme" = "Ayu Dark Bordered";
+        "workbench.iconTheme" = "ayu";
 
         "terminal.integrated.profiles.linux" = {
           fish = {
@@ -63,7 +63,6 @@
         "terminal.integrated.fontSize" = 13;
 
         "editor.largeFileOptimizations" = false;
-        "workbench.iconTheme" = "catppuccin-mocha";
 
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nil";
