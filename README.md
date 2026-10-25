@@ -43,7 +43,7 @@ The system runs GNOME on Wayland; X11 is disabled and GDM is the display manager
 
 The user side lives in `marcelo/modules/gnome.nix`, which installs the shell extensions and GNOME utilities and imports `marcelo/modules/dconf.nix`. That file declares the desktop state itself — enabled extensions, dock favorites, fonts, theme, input sources, keybindings, night light, Nautilus defaults, and the Ptyxis profile. Settings changed through the GNOME UI are overwritten on the next switch unless they are also written there.
 
-Ptyxis is the terminal and starts Fish through a custom command. Fonts are Apple SF Pro/SF Mono/New York and JetBrainsMono Nerd Font. The Night Theme Switcher extension flips the GNOME color scheme between light and dark at sunrise and sunset, and the `gnome-theme-follower` user service (`marcelo/modules/theme-follower.nix`) matches the Qogir GTK, icon, and cursor variants and the Ptyxis palette (Ayu, whose single palette covers light and dark) to it. Those settings are therefore left out of dconf and the `gtk` module on purpose.
+Ptyxis is the terminal and starts Fish through a custom command. Fonts are Apple SF Pro/SF Mono/New York and JetBrainsMono Nerd Font. The Night Theme Switcher extension flips the GNOME color scheme between light and dark at sunrise and sunset, and the `gnome-theme-follower` user service (`marcelo/modules/theme-follower.nix`) matches the Qogir GTK, icon, and cursor variants and the Ptyxis palette (Catppuccin Mocha or Latte) to it. Those settings are therefore left out of dconf and the `gtk` module on purpose.
 
 ## Local packages
 

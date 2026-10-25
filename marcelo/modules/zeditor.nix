@@ -14,6 +14,8 @@
     ];
 
     extensions = [
+      "catppuccin"
+      "catppuccin-icons"
       "dockerfile"
       "git-firefly"
       "latex"
@@ -56,8 +58,14 @@
 
       theme = {
         mode = "system";
-        dark = "Ayu Dark";
-        light = "Ayu Light";
+        dark = "Catppuccin Mocha";
+        light = "Catppuccin Latte";
+      };
+
+      icon_theme = {
+        mode = "system";
+        dark = "Catppuccin Mocha";
+        light = "Catppuccin Latte";
       };
 
       auto_update = false;
