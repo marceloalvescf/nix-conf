@@ -18,6 +18,9 @@
     # GNOME config
     ./modules/gnome.nix
 
+    # Firefox config
+    ./modules/firefox.nix
+
     # Font config
     ./modules/fonts.nix
 
