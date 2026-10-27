@@ -21,7 +21,6 @@
 
     initrd = {
       systemd = {
-        enable = true;
         contents."/etc/systemd/journald.conf".text = ''
           [Journal]
           ForwardToKMsg=yes
