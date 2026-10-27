@@ -36,6 +36,7 @@ in
     ./modules/openclaw.nix
     ./modules/packages.nix
     ./modules/ptyxis.nix
+    ./modules/qt.nix
     ./modules/theme-follower.nix
     ./modules/secrets.nix
     ./modules/ssh.nix
