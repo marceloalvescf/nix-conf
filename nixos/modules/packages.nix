@@ -13,7 +13,6 @@
 
   # Install some packages
   programs = {
-    firefox.enable = true;
     virt-manager.enable = true;
 
     # Run unpatched dynamic binaries

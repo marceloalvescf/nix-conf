@@ -15,6 +15,9 @@
     # Boot config
     ./modules/boot.nix
 
+    # Firefox config
+    ./modules/firefox.nix
+
     # Font config
     ./modules/fonts.nix
 
