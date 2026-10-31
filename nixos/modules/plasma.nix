@@ -33,7 +33,12 @@
     khelpcenter
     konsole
     plasma-browser-integration
+    qrca
   ];
+
+  # Plasma enables KDE PIM by default: KMail, Kontact, Merkuro, Akonadi Console
+  # and, through KMail, KTnef.
+  programs.kde-pim.enable = false;
 
   # greetd runs on a VT, so pam_kwallet5 sees PAM_TTY=tty1 and skips its session
   # hook ("not a graphical session"), leaving kwalletd6 to prompt. force_run
