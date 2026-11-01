@@ -12,7 +12,7 @@ This repository is machine-specific. It can be used as a reference, but it is no
 - GNOME on Wayland with GDM, PipeWire, AMD graphics, ROCm, Bluetooth, and OpenRGB
 - Fish, Starship, Ptyxis, tmux, Neovim, VS Code, Zed, Kubernetes, Terraform, and Ansible tooling
 - Docker/Arion services behind Traefik
-- Libvirt/KVM and Cockpit for local virtualization
+- Libvirt/KVM for local virtualization
 - Sunshine game streaming with KMS capture
 - Host-native Prometheus with containerized Grafana and a provisioned libvirt dashboard
 - SOPS-managed system and user secrets
@@ -28,7 +28,7 @@ This repository is machine-specific. It can be used as a reference, but it is no
 │   ├── configuration.nix        # System entry point
 │   ├── hardware-configuration.nix
 │   └── modules/
-│       └── arion/               # Traefik, Portainer, Autokube, streaming, Grafana
+│       └── arion/               # Traefik, Portainer, Grafana
 ├── marcelo/
 │   ├── home.nix                 # Home Manager entry point
 │   └── modules/                 # Shell, desktop, editor, and user tooling
@@ -90,11 +90,9 @@ The Fish function `nrs` automates the update, lock-file commit, build, diff, and
 
 ## Containers and monitoring
 
-Arion uses Docker to run `traefik`, `portainer`, `autokube`, `streaming`, and `grafana`. The projects share the `proxy` network, and Traefik routes services under `*-sc.alvesm.dev`.
+Arion uses Docker to run `traefik`, `portainer`, and `grafana`. The projects share the `proxy` network, and Traefik routes services under `*-sc.alvesm.dev`.
 
-`streaming` is declared but no longer starts at boot: its generated unit is detached with `systemd.services.<streaming unit>.wantedBy = lib.mkForce [ ]`. Start it on demand with `systemctl start arion-streaming`.
-
-Prometheus, node-exporter, and the libvirt exporter run directly on the host. Grafana reaches Prometheus through `host.docker.internal`; its datasource (with a pinned UID) and the libvirt dashboard are provisioned from `nixos/modules/arion/grafana/provisioning/` with UI edits disabled. Media data is stored under `/mnt/myexternaldisk/streaming`; application configuration is stored under `/home/marcelo/docker/streaming` or Docker volumes.
+Prometheus, node-exporter, and the libvirt exporter run directly on the host. Grafana reaches Prometheus through `host.docker.internal`; its datasource (with a pinned UID) and the libvirt dashboard are provisioned from `nixos/modules/arion/grafana/provisioning/` with UI edits disabled.
 
 Most container images use upstream mutable tags, so rebuilding NixOS does not fully pin their runtime contents.
 
