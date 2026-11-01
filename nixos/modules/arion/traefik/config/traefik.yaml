@@ -1,5 +1,6 @@
 global:
   sendAnonymousUsage: false
+  aliasHeadersStrategy: delete
 
 api:
   dashboard: true

@@ -9,14 +9,6 @@ http:
         - default-ipallowlist
         - traefik-dashboard-root-redirect
       tls: {}
-    cockpit:
-      rule: Host(`cockpit-sc.alvesm.dev`)
-      entryPoints:
-        - websecure
-      service: cockpit
-      middlewares:
-        - default-ipallowlist
-      tls: {}
     openclaw:
       rule: Host(`openclaw-sc.alvesm.dev`)
       entryPoints:
@@ -26,13 +18,6 @@ http:
         - default-ipallowlist
       tls: {}
   services:
-    cockpit:
-      loadBalancer:
-        # Cockpit serves a self-signed cert issued for 127.0.0.1, so the
-        # backend hop cannot be verified.
-        serversTransport: insecure-backend
-        servers:
-          - url: https://192.168.100.151:9090
     openclaw:
       loadBalancer:
         # The gateway runs as a user service on the host (marcelo/modules/openclaw.nix).
@@ -50,9 +35,6 @@ http:
         regex: "^https://traefik-sc\\.alvesm\\.dev/?$"
         replacement: "https://traefik-sc.alvesm.dev/dashboard/"
         permanent: false
-  serversTransports:
-    insecure-backend:
-      insecureSkipVerify: true
 
 tls:
   stores:

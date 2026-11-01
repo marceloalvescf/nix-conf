@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  lib,
   inputs,
   ...
 }:
@@ -25,10 +24,6 @@ let
     cp ${./grafana/provisioning/dashboards/dashboards.yaml} $out/dashboards/dashboards.yaml
     cp ${./grafana/provisioning/dashboards/libvirt.json} $out/dashboards/libvirt.json
   '';
-
-  # Read the unit name back from the project instead of hardcoding
-  # "arion-streaming", so it cannot drift from the project definition.
-  streamingService = config.virtualisation.arion.projects.streaming.serviceName;
 in
 
 {
@@ -38,14 +33,6 @@ in
     projects = {
       portainer.settings = {
         imports = [ ./portainer/portainer.nix ];
-      };
-
-      autokube.settings = {
-        imports = [ ./autokube/autokube.nix ];
-      };
-
-      streaming.settings = {
-        imports = [ ./streaming/streaming.nix ];
       };
 
       traefik.settings = {
@@ -61,11 +48,6 @@ in
       };
     };
   };
-
-  # Arion wants every project on multi-user.target. Detaching the unit keeps
-  # `streaming` declared but off at boot; start it on demand with
-  # `systemctl start arion-streaming`.
-  systemd.services.${streamingService}.wantedBy = lib.mkForce [ ];
 
   environment.systemPackages = [
     arion
