@@ -58,6 +58,9 @@
       "noatime"
       "nodiratime"
       "commit=60"
+      "nofail"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.automount"
       "x-gvfs-show"
     ];
   };
