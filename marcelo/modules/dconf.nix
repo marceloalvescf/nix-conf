@@ -37,8 +37,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/background" = {
-      picture-uri = "file://${pkgs.gnome-backgrounds}/share/backgrounds/gnome/map-l.svg";
-      picture-uri-dark = "file://${pkgs.gnome-backgrounds}/share/backgrounds/gnome/map-d.svg";
+      picture-uri = "file:///home/marcelo/Pictures/Wallpapers/macos-27-golden-gate-stock.png";
+      picture-uri-dark = "file:///home/marcelo/Pictures/Wallpapers/macos-27-golden-gate-dark.png";
       picture-options = "zoom";
     };
 
