@@ -14,10 +14,12 @@
     };
 
     # Reach the YubiKey through pcscd instead of scdaemon's built-in CCID
-    # driver, so gpg and ykman can share the card.
+    # driver, so gpg and ykman can share the card. Selecting the unused PIV
+    # applet drops the OpenPGP PIN unlock, so scdaemon skips it.
     scdaemonSettings = {
       disable-ccid = true;
       pcsc-shared = true;
+      disable-application = "piv";
     };
   };
 
