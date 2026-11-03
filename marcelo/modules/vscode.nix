@@ -101,6 +101,7 @@
         "terminal.integrated.suggest.enabled" = false;
         "claudeCode.preferredLocation" = "panel";
         "gitlens.codeLens.scopes" = "[]";
+        "claudeCode.hideOnboarding" = true;
       };
     };
   };
