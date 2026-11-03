@@ -14,10 +14,10 @@
       pull.rebase = true;
     };
 
-    # YubiKey OpenPGP signature subkey; "!" pins this exact subkey
+    # Primary key; gpg signs with its valid signing subkey on the YubiKey
     signing = {
       format = "openpgp";
-      key = "7B7558ABEB707090683AA77C90422C93F883108A!";
+      key = "EDF8805691FAC1B3AD0A5210A3AEA13F40407F89";
       signByDefault = true;
     };
   };
