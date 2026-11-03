@@ -11,6 +11,9 @@
       enable = true;
       autoSuspend = false;
     };
+
+    # gpg-agent serves SSH_AUTH_SOCK instead (marcelo/modules/gpg.nix)
+    gnome.gcr-ssh-agent.enable = false;
   };
 
   # Remove unnecessary GNOME packages

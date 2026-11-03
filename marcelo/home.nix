@@ -28,6 +28,7 @@ in
     ./modules/fish.nix
     ./modules/git.nix
     ./modules/gnome.nix
+    ./modules/gpg.nix
     ./modules/gtk.nix
     ./modules/kubernetes.nix
     ./modules/mimeapps.nix
