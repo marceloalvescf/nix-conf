@@ -25,15 +25,6 @@
           [Journal]
           ForwardToKMsg=yes
         '';
-
-        mounts = [
-          {
-            what = "/dev/disk/by-uuid/ccab8878-6047-4e1a-a212-426f917752a8";
-            where = "/key";
-            type = "ext4";
-            mountConfig.TimeoutSec = "10s";
-          }
-        ];
       };
 
       # Load kernel modules on boot.

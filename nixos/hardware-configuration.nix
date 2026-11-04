@@ -38,7 +38,7 @@
   boot.initrd.luks.devices."nixos-rootfs" = {
     device = "/dev/disk/by-path/pci-0000:01:00.0-nvme-1";
     header = "/dev/disk/by-partuuid/d3a16764-9496-4c51-b708-7857493e2412";
-    keyFile = "/key/usb-luks.key";
+    crypttabExtraOpts = [ "fido2-device=auto" ];
     allowDiscards = true;
   };
 
