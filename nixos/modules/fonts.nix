@@ -35,9 +35,9 @@ in
     fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = [ "New York" ];
-        sansSerif = [ "SF Pro Text" ];
-        monospace = [ "SF Mono" ];
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Adwaita Sans" ];
+        monospace = [ "Adwaita Mono" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };

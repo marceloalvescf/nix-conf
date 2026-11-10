@@ -37,17 +37,17 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///home/marcelo/Pictures/Wallpapers/macos-27-golden-gate-stock.png";
-      picture-uri-dark = "file:///home/marcelo/Pictures/Wallpapers/macos-27-golden-gate-dark.png";
+      picture-uri = "file:///home/marcelo/Pictures/Wallpapers/nix-bright.png";
+      picture-uri-dark = "file:///home/marcelo/Pictures/Wallpapers/nix-dark.png";
       picture-options = "zoom";
     };
 
     "org/gnome/desktop/interface" = {
-      document-font-name = "SF Pro Text 10";
+      document-font-name = "Adwaita Sans 10";
       font-antialiasing = "rgba";
       font-hinting = "full";
-      font-name = "SF Pro Text 10";
-      monospace-font-name = "SF Mono 11";
+      font-name = "Adwaita Sans 10";
+      monospace-font-name = "Adwaita Mono 11";
     };
 
     "org/gnome/shell/extensions/nightthemeswitcher/color-scheme" = {
@@ -162,7 +162,7 @@ with lib.hm.gvariant;
     "org/gnome/Ptyxis" = {
       cursor-blink-mode = "off";
       default-profile-uuid = "703ed983a52fe9b12a1a638b6941a022";
-      font-name = "JetBrainsMono Nerd Font Mono 10";
+      font-name = "JetBrainsMono Nerd Font Mono 14";
       profile-uuids = [ "703ed983a52fe9b12a1a638b6941a022" ];
       restore-session = false;
       scrollbar-policy = "never";

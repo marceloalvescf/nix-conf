@@ -11,7 +11,7 @@
   gtk = {
     enable = true;
     font = {
-      name = "SF Pro Text";
+      name = "Adwaita Sans";
       size = 10;
     };
 
