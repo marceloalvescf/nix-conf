@@ -28,11 +28,6 @@
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
-
-    apple-fonts = {
-      url = "github:Lyndeno/apple-fonts.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
