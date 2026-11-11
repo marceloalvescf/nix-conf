@@ -44,13 +44,21 @@
 
       agent = {
         dock = "right";
-        default_profile = "ask";
+        play_sound_when_agent_done = "when_hidden";
       };
 
       agent_servers = {
         claude-acp = {
           type = "registry";
-          default_config_options.model = "opus";
+          default_mode = "auto";
+          default_config_options = {
+            model = "opus";
+            effort = "high";
+          };
+          favorite_config_option_values.model = [
+            "opus"
+            "sonnet"
+          ];
         };
       };
 
