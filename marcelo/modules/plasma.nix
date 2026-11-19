@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   osConfig,
@@ -9,6 +10,15 @@
 let
   rootDisk = "disk/${lib.removePrefix "/dev/disk/by-uuid/" osConfig.fileSystems."/".device}";
   rootDiskFace = "starscream.ksysguard.piechart-small";
+
+  # Wallpaper package assembled from the images in ~/Pictures/Wallpapers, which
+  # stay outside the repo. Plasma shows contents/images_dark while the active
+  # global theme is dark, so the wallpaper follows the sunrise/sunset switch.
+  wallpapers = "${config.home.homeDirectory}/Pictures/Wallpapers";
+  wallpaperPackage = "wallpapers/Nix";
+  wallpaperImage = file: {
+    source = config.lib.file.mkOutOfStoreSymlink "${wallpapers}/${file}";
+  };
 
   # home-manager uses useGlobalPkgs, so there's no per-user overlay to hook
   # the flake input into; apply its overlay function locally instead.
@@ -45,7 +55,7 @@ in
 
     workspace = {
       clickItemTo = "select";
-      wallpaper = "/home/marcelo/Pictures/Wallpapers/nixos-blue.png";
+      wallpaper = "${config.xdg.dataHome}/${wallpaperPackage}";
       wallpaperBackground.blur = true;
     };
 
@@ -450,6 +460,17 @@ in
   };
 
   services.gpg-agent.pinentry.package = pkgs.pinentry-qt;
+
+  xdg.dataFile = {
+    "${wallpaperPackage}/metadata.json".text = builtins.toJSON {
+      KPlugin = {
+        Id = "Nix";
+        Name = "Nix";
+      };
+    };
+    "${wallpaperPackage}/contents/images/3840x2160.png" = wallpaperImage "nix-bright.png";
+    "${wallpaperPackage}/contents/images_dark/3840x2160.png" = wallpaperImage "nix-dark.png";
+  };
 
   home.packages = [
     qogir-kde
