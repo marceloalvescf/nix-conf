@@ -115,5 +115,6 @@ in
       # AI related packages from llm-agents overlay
       claude-desktop
       llmAgents.orca
+      llmAgents.herdr-app
     ];
 }
