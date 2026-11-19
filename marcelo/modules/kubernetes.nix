@@ -15,10 +15,7 @@
   ];
 
   systemd.user.services.cloud-provider-kind = {
-    Unit = {
-      Description = "Cloud provider for kind clusters (LoadBalancer support)";
-      After = "docker.service";
-    };
+    Unit.Description = "Cloud provider for kind clusters (LoadBalancer support)";
 
     Service = {
       ExecStart = "${pkgs.cloud-provider-kind}/bin/cloud-provider-kind --gateway-channel disabled";

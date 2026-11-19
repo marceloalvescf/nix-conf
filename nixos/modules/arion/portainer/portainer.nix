@@ -22,6 +22,7 @@
           "traefik.http.routers.portainer.rule" = "Host(`portainer-sc.alvesm.dev`)";
           "traefik.http.routers.portainer.entrypoints" = "websecure";
           "traefik.http.routers.portainer.tls" = "true";
+          "traefik.http.routers.portainer.middlewares" = "default-ipallowlist@file";
           "traefik.http.services.portainer.loadbalancer.server.port" = "9000";
         };
       };

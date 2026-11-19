@@ -4,7 +4,6 @@
   # Packages installed at system level
   environment.systemPackages = with pkgs; [
     dnsmasq
-    power-profiles-daemon
     spice-gtk
     spice-protocol
     virglrenderer

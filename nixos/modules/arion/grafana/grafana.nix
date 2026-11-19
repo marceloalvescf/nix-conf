@@ -39,6 +39,7 @@
           "traefik.http.routers.grafana.rule" = "Host(`grafana-sc.alvesm.dev`)";
           "traefik.http.routers.grafana.entrypoints" = "websecure";
           "traefik.http.routers.grafana.tls" = "true";
+          "traefik.http.routers.grafana.middlewares" = "default-ipallowlist@file";
           "traefik.http.services.grafana.loadbalancer.server.port" = "3000";
         };
       };

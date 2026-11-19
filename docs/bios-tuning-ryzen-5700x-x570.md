@@ -11,7 +11,7 @@
   * 2×16 GB Corsair CMK32GX4M2E3200C16
   * Total: 64 GB DDR4
 * Operating system: NixOS
-* Kernel recommendation: official/latest NixOS kernel, not Zen Kernel
+* Kernel: XanMod (`linuxPackages_xanmod_latest`), not Zen Kernel
 
 ---
 
@@ -24,7 +24,7 @@ RAM: 64 GB DDR4 @ 3000 MHz
 CPU PBO: Enabled
 Curve Optimizer: Negative -10 all-core
 Max CPU Boost Clock Override: +200 MHz
-Kernel: Official/latest NixOS kernel
+Kernel: XanMod (linuxPackages_xanmod_latest)
 ```
 
 This setup prioritizes stability for DevOps workstation tasks while still improving CPU and memory performance.
@@ -160,15 +160,18 @@ This is a conservative and stable Ryzen 7 5700X tuning profile.
 
 # 5. Kernel Recommendation
 
-Use the official/latest NixOS kernel.
+The system runs XanMod (`pkgs.linuxPackages_xanmod_latest`, set in `nixos/modules/boot.nix`).
 
 Avoid Zen Kernel on this workstation.
 
-Observed issue:
+Observed issues:
 
 ```text
 Zen Kernel caused hard freezes, abnormal memory/cache behavior, and instability.
-Official/latest kernel resolved the freezes.
+Zen Kernel also starves fdatasync on the root NVMe under concurrent buffered
+writes (about 15-20 fdatasync/s against 200-300 on XanMod), which hangs etcd in
+local kind clusters.
+The official/latest kernel and XanMod do not show either problem.
 ```
 
 ---
@@ -312,7 +315,7 @@ CPU:
 
 OS:
   NixOS
-  Official/latest kernel
+  XanMod kernel
   Avoid Zen Kernel
 ```
 

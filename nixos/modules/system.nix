@@ -2,7 +2,7 @@
 
 {
   # Made /etc/hosts file writable
-  environment.etc.hosts.mode = "0755";
+  environment.etc.hosts.mode = "0644";
 
   # Set your time zone.
   time.timeZone = "Etc/GMT+3";

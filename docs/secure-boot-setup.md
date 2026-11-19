@@ -5,6 +5,8 @@
 - **Motherboard:** ASUS TUF GAMING X570-PLUS/BR
 - **Dual boot:** NixOS (NVMe) + Windows (NVMe)
 
+> This records the original setup. The NixOS ESP has since moved to the USB flash drive that also carries the root LUKS header; see [Root LUKS unlock](luks-fido2-usb.md). The Secure Boot keys and the steps below are unchanged.
+
 ## Context
 
 Windows requires Secure Boot enabled for games that use kernel-level anti-cheat (Vanguard, EAC, BattlEye, etc.). To avoid toggling Secure Boot every time you switch between OSes, NixOS can be configured to boot with Secure Boot using Lanzaboote.

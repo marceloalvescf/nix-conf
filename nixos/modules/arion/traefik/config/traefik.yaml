@@ -1,5 +1,6 @@
 global:
   sendAnonymousUsage: false
+  aliasHeadersStrategy: delete
 
 api:
   dashboard: true
@@ -40,14 +41,9 @@ certificatesResolvers:
         propagation:
           delayBeforeChecks: 30s
 
+# Both logs go to stdout, where the Docker json-file driver rotates them.
 log:
-  filePath: "/var/log/traefik.log"
   level: INFO
-  maxSize: 10
-  maxBackups: 3
-  maxAge: 7
 
 accessLog:
-  filePath: "/var/log/access.log"
   format: "json"
-  bufferingSize: 100   # batch writes, lighter on flash storage

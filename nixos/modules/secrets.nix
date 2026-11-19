@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 
 {
   # Point to your secrets file
@@ -12,24 +12,10 @@
       generateKey = false; # We're using existing SSH-derived key
     };
 
-    # Define secrets that should be available system-wide
+    # Each value is a complete KEY=value line, consumed as a container env file
     secrets = {
       cloudflare_api_token = { };
       grafana_admin_password = { };
-    };
-
-    # Create an env file for Traefik with the Cloudflare token
-    templates."traefik-cloudflare.env" = {
-      content = ''
-        ${config.sops.placeholder.cloudflare_api_token}
-      '';
-    };
-
-    # Create an env file for Grafana admin password
-    templates."grafana-admin-password.env" = {
-      content = ''
-        ${config.sops.placeholder.grafana_admin_password}
-      '';
     };
   };
 }

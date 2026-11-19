@@ -19,12 +19,20 @@ in
     NIXOS_OZONE_WL = "1";
     TG_DOWNLOAD_DIR = "$HOME/.terragrunt-cache";
   };
+  home.sessionPath = [ "$HOME/.local/bin" ];
+  # hm-session-vars.sh only reaches login shells; desktop-launched apps inherit
+  # the systemd user environment. NixOS sets an absolute PATH in
+  # /etc/environment.d/50-systemd-path.conf, so prepend from a later file.
+  xdg.configFile."environment.d/60-local-bin.conf".text = ''
+    PATH=$HOME/.local/bin:$PATH
+  '';
 
   imports = [
     ./modules/bash.nix
     ./modules/chromium.nix
     ./modules/fish.nix
     ./modules/git.nix
+    ./modules/gpg.nix
     ./modules/kitty.nix
     ./modules/kubernetes.nix
     ./modules/mimeapps.nix

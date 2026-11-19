@@ -6,7 +6,7 @@
   services = {
     traefik = {
       service = {
-        image = "traefik:v3.7.10";
+        image = "traefik:v3.7.17";
         container_name = "traefik";
         restart = "unless-stopped";
         environment = {

@@ -30,19 +30,6 @@
     };
   };
 
-  services.cockpit = {
-    enable = true;
-    openFirewall = true;
-    port = 9090;
-    allowed-origins = [
-      "https://192.168.100.151:9090"
-      "https://cockpit-sc.alvesm.dev"
-    ];
-    plugins = [
-      pkgs.cockpit-machines
-    ];
-  };
-
   # Allow traffic from Docker networks through the firewall
   networking.firewall = {
     trustedInterfaces = [

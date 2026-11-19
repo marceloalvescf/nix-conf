@@ -89,7 +89,6 @@ in
       eza
       fastfetch
       gh
-      git
       htop
       jq
       libxslt
@@ -106,7 +105,6 @@ in
       ssh-to-age
       telegram-desktop
       terraform
-      virt-manager
       vlc
       wget
       wl-clipboard
@@ -114,5 +112,7 @@ in
     ++ [
       # AI related packages from llm-agents overlay
       claude-desktop
+      llmAgents.orca
+      llmAgents.herdr-app
     ];
 }

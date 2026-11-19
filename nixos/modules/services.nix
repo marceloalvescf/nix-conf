@@ -6,8 +6,14 @@
     # required for yubikey communication
     pcscd.enable = true;
 
-    # Enable OpenSSH daemon
-    openssh.enable = true;
+    # Enable OpenSSH daemon, key-only
+    openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
+    };
 
     # Enable power-profiles-daemon service
     power-profiles-daemon.enable = true;

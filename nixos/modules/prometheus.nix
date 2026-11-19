@@ -81,7 +81,4 @@
     wants = [ "libvirtd.service" ];
     serviceConfig.DynamicUser = false;
   };
-
-  # Open firewall ports for Grafana Datasource works
-  networking.firewall.allowedTCPPorts = [ 9091 ];
 }

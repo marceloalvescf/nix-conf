@@ -5,8 +5,6 @@
     enable = true;
 
     initExtra = ''
-      eval "$(starship init bash)"
-      eval "$(zoxide init bash)"
       eval "$(mcfly init bash)"
     '';
 
@@ -31,7 +29,6 @@
       "gps" = "git push";
       "nfu" = "nix flake update";
       "nrdr" = "nixos-rebuild dry-run --flake .";
-      "reload_kitty" = "kill -SIGUSR1 $KITTY_PID";
     };
   };
 }

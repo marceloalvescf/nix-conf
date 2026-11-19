@@ -449,6 +449,8 @@ in
     '';
   };
 
+  services.gpg-agent.pinentry.package = pkgs.pinentry-qt;
+
   home.packages = [
     qogir-kde
     pkgs.qogir-icon-theme

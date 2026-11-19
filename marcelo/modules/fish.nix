@@ -31,16 +31,15 @@
       "gps" = "git push";
       "nfu" = "nix flake update";
       "nrdr" = "nixos-rebuild dry-run --flake .";
-      "reload_kitty" = "kill -SIGUSR1 $KITTY_PID";
     };
 
     functions = {
       genpasswd = "LC_ALL=C tr -dc 'A-Za-z0-9_!@#$%^&*()-_=+' </dev/random | head -c 32 | xargs | tr -d '\n'";
       nrs = ''
         nix flake update; or return
-        git add flake.lock
-        if not git diff --cached --quiet
-          git commit -m "chore: update flake inputs"; or return
+        # Commit by path so anything else already staged stays out.
+        if not git diff --quiet HEAD -- flake.lock
+          git commit -m "chore: update flake inputs" -- flake.lock; or return
         end
         sudo nixos-rebuild build --flake .; or return
         nvd diff /run/current-system result

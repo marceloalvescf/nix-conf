@@ -34,6 +34,7 @@
         ];
       userSettings = {
         "editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
+        "editor.lineHeight" = 1.618;
         "debug.console.fontFamily" = "JetBrainsMono Nerd Font Mono";
         "terminal.integrated.fontFamily" = "JetBrainsMono Nerd Font Mono";
 
@@ -101,6 +102,7 @@
         "terminal.integrated.suggest.enabled" = false;
         "claudeCode.preferredLocation" = "panel";
         "gitlens.codeLens.scopes" = "[]";
+        "claudeCode.hideOnboarding" = true;
       };
     };
   };
